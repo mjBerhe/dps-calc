@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import useHover from '../../hooks/useHover';
 import { usePrayers } from '../../state/prayers';
 import { useUserStats } from '../../state/userStats';
