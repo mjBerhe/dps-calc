@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
+@import './firstRow';
+@import './secondRow';
+@import './thirdRow';
+
+
+$blackColor: rgb(0, 0, 0);
+$whiteColor: rgb(255, 255, 255);
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Roboto Slab', serif;
+}
+
+body {
+   height: 100%;
+   background-image: url("/Misc/background1.jfif");
+   background-size: cover;
+   margin: 0 10vw 0 10vw;
+}
+
+h1 {
+   font-size: 2.5em;
+   font-weight: bold;
+   color: $blackColor;
+}
+
+h2 {
+   font-size: 1.5em;
+   font-weight: bold;
+   color: $blackColor;
+}
+
+h5 {
+   font-size: 0.75em;
+   font-weight: bold;
+   color: $blackColor;
+}
+
+.grid-container {
+   display: grid;
+   grid-template-rows: minmax(80px, 10vh) minmax(400px, 45vh) 45vh;
+   grid-template-columns: repeat(2, minmax(1fr, 1fr));
+}

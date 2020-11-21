@@ -1,0 +1,880 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Roboto Slab', serif;
+}
+
+h1 {
+   font-size: 2.5em;
+   font-weight: bold;
+   color: black;
+}
+
+h2 {
+   font-size: 1.25em;
+   font-weight: bold;
+   color: black;
+}
+
+h3 {
+   font-size: 1em;
+   font-weight: bold;
+   color: black;
+}
+
+h4 {
+   font-size: 1em;
+   font-weight: normal;
+   color: black
+}
+
+h5 {
+   font-size: 0.75em;
+   font-weight: bold;
+   color: black;
+}
+
+h6 {
+   font-size: 0.75em;
+   font-weight: normal;
+   color: black;
+}
+
+body {
+   height: 100%;
+   background-image: url("/Misc/background1.jfif");
+   margin: 0 10% 0 10%;
+}
+
+@media (max-width: 900px) {
+   /*Removes side margins when display is <900px*/
+   body {
+      margin: 0;
+   }
+}
+
+.App {
+   text-align: center;
+}
+
+.grid-container {
+   display: grid;
+   grid-template-columns: repeat(2, minmax(1fr, 1fr));
+   grid-template-rows: 85px 1fr 1fr;
+}
+
+.title {
+   background: #9DB6E1;
+   grid-column: 1/3;
+   grid-row: 1/2;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: 1px solid black;
+}
+
+.title img {
+   height: 35px;
+}
+
+.title h1 {
+   margin: 13px;
+}
+
+.second-row-container {
+   background: #4A6EAB;
+   margin: 2px 0 2px 0;
+   grid-column: 1/3;
+   grid-row: 2/3;
+   display: grid;
+   grid-template-columns: minmax(240px, 0.9fr) minmax(375px, 1fr);
+   grid-template-rows: 1;
+   border: 1px solid black;
+}
+
+/*---------------------------------------TOP LEFT SECTION---------------------------------------*/
+
+.stat-block-container {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    padding: 0 5px 0 5px;
+    display: grid;
+    grid-template-columns: minmax(50px, 1fr) minmax(50px, 1fr);
+    grid-template-rows: 50px 0.3fr 1fr;
+}
+
+.stat-block-container select {
+    border-radius: 4px;
+    border: 1px solid black;
+    outline: none;
+}
+
+.stat-block-container input[type=number] {
+    padding-left: 5px;
+    width: 40px;
+    border: 1px solid black;
+    border-radius: 4px;
+    outline: none;
+}
+
+.stat-title {
+    grid-column: 1/3;
+    grid-row: 1/2;
+    margin: 7.5px 0 7.5px 0;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lvl-inputs-class {
+    grid-column: 1/3;
+    grid-row: 2/3;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    margin: 0;
+}
+
+.lvl-inputs-class img {
+    width: 22px;
+    height: 23px;
+    margin: 0 5px 0 0;
+    z-index: 1;
+}
+
+.lvl-item-1 {
+    /*background: yellow;*/
+    grid-column: 2/3;
+    grid-row: 1/2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 30px;
+    margin: 0 5px 0 0;
+}
+
+.attack-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.6;
+    width: 80px;
+    margin: -18px 0 0 0;
+    border-radius: 4px;
+}
+
+.lvl-item-2 {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 30px;
+    margin: 7px 5px 0 0;
+}
+
+.strength-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.6;
+    width: 90px;
+    margin: -18px 0 0 0;
+    border-radius: 4px;
+}
+
+.lvl-item-3 {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30px;
+    margin: 0 0 0 5px;
+}
+
+.range-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.6;
+    width: 85px;
+    margin: -18px 0 0 0;
+    border-radius: 4px;
+}
+
+.lvl-item-4 {
+    grid-column: 3/4;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30px;
+    margin: 0 0 0 5px;
+}
+
+.magic-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.6;
+    width: 80px;
+    margin: -18px 0 0 0;
+    border-radius: 4px;
+}
+
+.potions-prayers {
+    grid-column: 1/3;
+    grid-row: 3/4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.potion-class {
+    /*background: yellow;*/
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+
+.potion-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2.5px 0 2.5px 0;
+    height: 35px;
+}
+
+.potion-item select {
+    width: 170px;
+    margin: 0 12px 0 0;
+}
+
+.prayer-class {
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+.prayer-item {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    margin: 2.5px 0 2.5px 0;
+}
+
+.prayer-item select {
+    width: 170px;
+    margin: 0 0 0 5px;
+}
+
+.prayer-pic-container {
+    /*background: yellow;*/
+    width: 35px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*When width of screen goes below 1150px*/
+@media (max-width: 1200px) {
+    .potion-item select {
+        width: 100px;
+        margin: 0 10px 0 0;
+    }
+    .prayer-item select {
+        width: 100px;
+        margin: 0 15px 0 0;
+    }
+    .second-row-container {
+        background: #4A6EAB;
+        margin: 2px 0 2px 0;
+        grid-column: 1/3;
+        grid-row: 2/3;
+        display: grid;
+        grid-template-columns: minmax(260px, 0.6fr) minmax(375px, 1fr);
+        grid-template-rows: 1;
+        border: 1px solid black;
+    }
+}
+
+/*---------------------------------------TOP RIGHT SECTION---------------------------------------*/
+
+.monster-and-outputs-container {
+    padding: 0 5% 0 5%;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    display: grid;
+    /*grid-template-rows: 40px 150px 53px 30px;*/
+    grid-template-rows: 50px 1fr .33fr .33fr;
+    grid-template-columns: 1fr;
+}
+
+.final-title {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    margin: 7.5px 0 7.5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.final-outputs table {
+    border-collapse: collapse;
+    border: 5px solid black;
+    width: 100%;
+    margin: 0 0 5px 0;
+    table-layout: fixed;
+}
+
+.final-outputs th {
+    background: #1C4180;
+    color: white;
+    font-size: 1em;
+    font-weight: normal;
+    border-bottom: 2px solid white;
+    width: 130px;
+    height: 36px;
+}
+
+.final-outputs td {
+    background: #9DB6E1;
+    border-bottom: 2px solid white;
+    height: 25px;
+    font-size: 1em;
+    font-weight: normal;
+    color: black;
+    height: 36px;
+}
+
+.final-outputs-spec table {
+    border-collapse: collapse;
+    border: 5px solid black;
+    width: 100%;
+    margin: 0 0 5px 0;
+    table-layout: fixed;
+}
+
+.final-outputs-spec th {
+    background: #1C4180;
+    color: white;
+    font-size: 1em;
+    font-weight: normal;
+    border-bottom: 1.5px solid white;
+    width: 130px;
+    height: 24px;
+}
+
+.final-outputs-spec td {
+    background: #9DB6E1;
+    border-bottom: 1.5px solid white;
+    height: 25px;
+    font-size: 1em;
+    font-weight: normal;
+    color: black;
+    height: 24px;
+}
+
+.monster-container {
+    background: yellow;
+    grid-row: 3/4;
+    grid-column: 1/2;
+    /* border: ; */
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.monster-select {
+    /* background: ; */
+    width: 100%;
+    max-width: 400px;
+    z-index: 2;
+}
+
+.misc-row {
+    /*background: green;*/
+    grid-row: 4/5;
+    grid-column: 1/2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-class {
+    margin-left: 5px;
+}
+
+.misc-img {
+    z-index: 1;
+}
+
+.special-attack {
+    display: flex;
+    align-items: center;
+    /*margin-left: 20px;*/
+}
+
+.special-attack-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.6;
+    width: 120px;
+    margin: -23px 0 0 0;
+    border-radius: 4px;
+}
+
+.slayer-check {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.slayer-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.6;
+    width: 80px;
+    margin: -23px 0 0 0;
+    border-radius: 4px;
+}
+
+.DWH-spec {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.DWH-spec input[type=number] {
+    padding-left: 5px;
+    width: 40px;
+    border: 1px solid black;
+    border-radius: 4px;
+    outline: none;
+}
+
+.DWH-spec-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.6;
+    width: 120px;
+    margin: -23px 0 0 0;
+    border-radius: 4px;
+}
+
+
+/*---------------------------------------BOTTOM SECTION---------------------------------------*/
+
+.equipment-select {
+    background: #9DB6E1;
+    grid-column: 1/2;
+    grid-row: 3/4;
+    margin: 2px 0px 2px 0px;
+    display: grid;
+    grid-template-columns: minmax(0.01fr, 1fr) minmax(75px, 0.2fr) 0fr 0.2fr 0.2fr 140px minmax(10px, 1fr);
+    grid-template-rows: repeat(5, 60px);
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.equipment-select2 {
+    background: #9DB6E1;
+    grid-column: 2/3;
+    grid-row: 3/4;
+    margin: 2px 0px 2px 0;
+    display: grid;
+    grid-template-columns: minmax(0.01fr, 1fr) minmax(75px, 0.2fr) 0.5fr 0.5fr 0.5fr 140px minmax(10px, 1fr);
+    grid-template-rows: repeat(5, 60px);
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.armor-set-stats {
+    /*background: yellow;*/
+    grid-column: 6/8;
+    grid-row: 1/6;
+    font-size: 0.8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: start;
+    min-width: 130px;
+    margin: 0 0 0 15%;
+    padding: 0;
+}
+
+.armor-set-stats h4 {
+    margin: 0 0 0 10px;
+}
+
+.armor-set1-title {
+    grid-column: 1/4;
+    /* background: ; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.armor-set2-title {
+    grid-column: 1/4;
+    /* background: ; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spell-slot {
+    /*background: yellow;*/
+    grid-column: 1/3;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spell-slot img {
+    height: 42px;
+}
+
+.spell-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.6;
+    width: 110px;
+    margin: -35px 0 0 0;
+    border-radius: 4px;
+}
+
+.weapon-slot {
+    /*background: yellow;*/
+    grid-column: 3/4;
+    grid-row: 3/4;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /*margin-top: 11px;*/
+}
+
+.weapon-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/WeaponSlot.png");
+}
+
+.weapon-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 60px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.style-slot {
+    grid-column: 1/3;
+    grid-row: 3/4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.style-slot img {
+    height: 42px;
+}
+
+.style-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.6;
+    width: 115px;
+    margin: -30px 0 0 0;
+    border-radius: 4px;
+}
+
+
+.helm-slot {
+    grid-column: 4/5;
+    grid-row: 1/2;
+    background: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.helm-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/HelmSlot.png");
+}
+
+.helm-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.shield-slot {
+    grid-column: 5/6;
+    grid-row: 3/4;
+    background: "";
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.shield-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/ShieldSlot.png");
+}
+
+.shield-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.body-slot {
+    grid-column: 4/5;
+    grid-row: 3/4;
+    background: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/BodySlot.png");
+}
+
+.body-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.leg-slot {
+    grid-column: 4/5;
+    grid-row: 4/5;
+    background: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leg-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/LegSlot.png");
+}
+
+.leg-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.boot-slot {
+    grid-column: 4/5;
+    grid-row: 5/6;
+    background: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boot-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/BootSlot.png");
+}
+
+.boot-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.cape-slot {
+    grid-column: 3/4;
+    grid-row: 2/3;
+    background: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 0 15px;
+}
+
+.cape-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/CapeSlot.png");
+}
+
+.cape-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.glove-slot {
+    grid-column: 3/4;
+    grid-row: 5/6;
+    background: "";
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.glove-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/GloveSlot.png");
+}
+
+.glove-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.neck-slot {
+    grid-column: 4/5;
+    grid-row: 2/3;
+    background: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px 0 5px;
+}
+
+.neck-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/NeckSlot.png");
+}
+
+.neck-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.ammo-slot {
+    grid-column: 5/6;
+    grid-row: 2/3;
+    background: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px 0 0;
+}
+
+.ammo-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/AmmoSlot.png");
+}
+
+.ammo-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.ring-slot {
+    grid-column: 5/6;
+    grid-row: 5/6;
+    background: "";
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.ring-slot img {
+    height: 36px;
+    width: 36px;
+    background-image: url("/Equipment/RingSlot.png");
+}
+
+.ring-hover {
+    position: absolute;
+    background: white;
+    opacity: 0.7;
+    width: 120px;
+    margin: 0 0 0 90px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.buttons-section {
+    /*background: yellow;*/
+    grid-column: 1/3;
+    grid-row: 4/6;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 1.5px solid black;
+    border-radius: 4px;
+    transition: all 0.2s;
+    outline-color: white;
+}
+
+.button:hover {
+    color: white;
+    background: black;
+
+}
+
+.paste-set {
+    margin: 12px;
+}
