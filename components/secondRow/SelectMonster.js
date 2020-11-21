@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SelectSearch from 'react-select-search';
 import { useLists } from '../../state/lists.js';
 
 export const SelectMonster = React.memo(() => {
@@ -40,13 +39,6 @@ export const SelectMonster = React.memo(() => {
 	return(
 		<div className="monster-container">
 			<div className="monster-select">
-				<SelectSearch
-					options={options}
-					value={monsterID}
-					search
-					placeholder="Select Monster"
-					onChange={setMonsterID}
-				/>
 			</div>
 		</div>
 	)

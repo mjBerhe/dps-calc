@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SelectSearch from 'react-select-search';
 import useHover from '../../../hooks/useHover';
 import { useLists } from '../../../state/lists.js';
 import { useEquippedGear } from '../../../state/equippedGear.js';
@@ -80,13 +79,6 @@ export const SelectWeapon = React.memo(() => {
 					<h6>{equippedWeapon.stats.prayBonus ? `Pray Bonus: ${equippedWeapon.stats.prayBonus}` : null}</h6>
 				</div>
 			}
-			<SelectSearch
-				options={options}
-				value={weaponID}
-				search
-				placeholder='Select Weapon'
-				onChange={setWeaponID}
-			/>
 		</div>
 	)
 })
