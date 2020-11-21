@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { connectToDatabase } from '../util/mongoDB.js';
 import Head from 'next/head'
 import { useUserStats } from '../state/userStats.js';
-import { useUserStats2 } from '../state/userStats2.js';
 import { useLists } from '../state/lists.js';
 
 import Header from '../components/firstRow/Header';
@@ -43,13 +42,13 @@ export default function DpsCalc({ lists }) {
                <PotionSelect/>
             </div>
             <div className="r2-second-column">
-               <SelectMonster/>
+               {/* <SelectMonster/> */}
             </div>
          </div>
 
          <div className='r3-container'>
             <div className='equipment-select'>
-              <SelectWeapon/>
+              {/* <SelectWeapon/> */}
             </div>
          </div>
       </div>
