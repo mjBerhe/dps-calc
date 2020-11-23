@@ -1,0 +1,18 @@
+@mixin flexCenter() {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.r2-second-column {
+   border: 1px solid yellow;
+   display: grid;
+   grid-template-columns: 85% 15%;
+   grid-template-rows: 15% 70% 15%;
+}
+
+.r2-c2-header {
+   grid-row: 1/2;
+   grid-column: 1/2;
+   @include flexCenter();
+}

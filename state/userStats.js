@@ -34,15 +34,16 @@ export const useUserStats = create((set, get) => ({
    isMonsterDemon: false,
    isMonsterTurothKurask: false,
    setStat: (statType, value) => {
-      if (statType === 'specialPrayer') {
-         set(() => ({
-            attPrayer: value,
-            strPrayer: value,
-         }));
-      } else {
-         set(() => ({
-            [statType]: value,
-         }));
-      } 
+      set(() => ({
+         [statType]: value,
+      })); 
    },
+   setMultipleStats: (objectOfStats) => {
+      const listOfStats = Object.keys(objectOfStats);
+      listOfStats.forEach(stat => {
+         set(() => ({
+            [stat]: objectOfStats[stat],
+         }));
+      });
+   }
 }));

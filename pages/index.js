@@ -11,6 +11,7 @@ import PotionSelect from '../components/secondRow/PotionSelect';
 
 import { SelectMonster } from '../components/secondRow/SelectMonster';
 import { SelectWeapon } from '../components/thirdRow/SelectEquipment/SelectWeapon';
+import { SelectWeaponStyle } from '../components/thirdRow/SelectEquipment/SelectAttackStyle';
 
 
 export default function DpsCalc({ lists }) {
@@ -42,13 +43,15 @@ export default function DpsCalc({ lists }) {
                <PotionSelect/>
             </div>
             <div className="r2-second-column">
+               <h2 className='r2-c2-header'>Armor Set 1 vs Armor Set 2</h2>
                {/* <SelectMonster/> */}
             </div>
          </div>
 
          <div className='r3-container'>
             <div className='equipment-select'>
-              {/* <SelectWeapon/> */}
+              <SelectWeapon/>
+              <SelectWeaponStyle/>
             </div>
          </div>
       </div>

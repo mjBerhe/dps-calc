@@ -15,22 +15,11 @@
    @include flexCenter();
 }
 
-.r2-container {
-   grid-column: 1/3;
-   grid-row: 2/3;
-   background: #4a6eacce;
-   margin: 3px 0 3px 0;
-   display: grid;
-   grid-template-columns: minmax(500px, 35%) minmax(500px, 65%);
-   grid-template-rows: minmax(400px, 100%);
-   border: 2px solid black;
-}
-
 .r2-first-column {
+   border: 1px solid pink;
    display: grid;
    grid-template-columns: 50% 50%;
-   grid-template-rows: 15% 20% 65%;
-   border: 1px solid pink;
+   grid-template-rows: 15% 20% 65%; 
 }
 
 .r2-c1-header {

@@ -38,4 +38,12 @@ export const useUserStats2 = create((set, get) => ({
          [statType]: value,
       }));
    },
+   setMultipleStats2: (objectOfStats) => {
+      const listOfStats = Object.keys(objectOfStats);
+      listOfStats.forEach(stat => {
+         set(() => ({
+            [stat]: objectOfStats[stat],
+         }));
+      });
+   }
 }));

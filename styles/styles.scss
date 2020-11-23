@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
 @import './firstRow';
-@import './secondRow';
+@import './secondRow-c1';
+@import './secondRow-c2';
 @import './thirdRow';
+@import './dropdown';
 
 
 $blackColor: rgb(0, 0, 0);
@@ -42,5 +44,24 @@ h5 {
 .grid-container {
    display: grid;
    grid-template-rows: minmax(80px, 10vh) minmax(400px, 45vh) 45vh;
-   grid-template-columns: repeat(2, minmax(1fr, 1fr));
+   grid-template-columns: repeat(2, minmax(500px, 50%));
+}
+
+.r2-container {
+   grid-column: 1/3;
+   grid-row: 2/3;
+   background: #4a6eacce;
+   margin: 3px 0 3px 0;
+   display: grid;
+   grid-template-columns: minmax(500px, 35%) minmax(500px, 65%);
+   grid-template-rows: minmax(400px, 100%);
+   border: 2px solid black;
+}
+
+.r3-container {
+   grid-column: 1/3;
+   grid-row: 3/4;
+   background: #9DB6E1;
+   margin: 3px 0 3px 0;
+   border: 2px solid black;
 }

@@ -27,30 +27,47 @@ const PrayerSelect = () => {
       magic4: state.magic4,
    }), shallow);
 
-   const { setStat } = useUserStats();
-   const attPrayerValue = useUserStats(state => state.attPrayer);
-   const { setStat2 } = useUserStats2();
+   const { setStat, setMultipleStats } = useUserStats();
+   const { attPrayerValue, strPrayerValue } = useUserStats(state => ({
+      attPrayerValue: state.attPrayer,
+      strPrayerValue: state.strPrayer,
+   }));
+   const { setStat2, setMultipleStats2 } = useUserStats2();
 
    const handleAttackPrayer = (e) => {
-      const { type: type, value: value } = changeAttackPrayer(e.target.name);
+      const { type, value, specialPrayerDeactivated } = changeAttackPrayer(e.target.name);
       setStat(type, value);
       setStat2(type, value);
+      if (specialPrayerDeactivated) { // if a special prayer was just deactivated
+         setStat('strPrayer', 0);
+         setStat2('strPrayer', 0);
+      }
    }
 
    useEffect(() => {
-      console.log(attPrayerValue);
-   }, [attPrayerValue])
+      console.log(attPrayerValue, strPrayerValue);
+   }, [attPrayerValue, strPrayerValue])
 
    const handleStrengthPrayer = (e) => {
-      const { type: type, value: value } = changeStrengthPrayer(e.target.name);
+      const { type, value, specialPrayerDeactivated } = changeStrengthPrayer(e.target.name);
       setStat(type, value);
       setStat2(type, value);
+      if (specialPrayerDeactivated) { // if a special prayer was just deactivated
+         setStat('attPrayer', 0);
+         setStat2('attPrayer', 0);
+      }
    }
    
    const handleSpecialPrayer = (e) => {
       const { type: type, value: value } = changeSpecialPrayer(e.target.name);
-      setStat(type, value);
-      setStat2(type, value);
+      setMultipleStats({
+         attPrayer: value,
+         strPrayer: value,
+      });
+      setMultipleStats2({
+         attPrayer: value,
+         strPrayer: value,
+      });
    }
 
    const handleRangePrayer = (e) => {

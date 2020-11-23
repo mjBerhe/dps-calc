@@ -99,6 +99,9 @@ export const usePrayers = create((set, get) => ({
    },
    changeAttackPrayer: (prayerName) => {
       const chosenPrayer = get()[prayerName];
+      let specialPrayerDeactivated = false;
+      const chivalry = get().chivalry.active;
+      const piety = get().piety.active;
       if (chosenPrayer.active) { // if prayer is already on, turn it off
          set(() => ({
             [prayerName]: {
@@ -110,6 +113,9 @@ export const usePrayers = create((set, get) => ({
          }));
          return { type: chosenPrayer.type, value: 0 }
       } else { // turn every other similar prayer off, and turn chosen prayer on
+         if (chivalry || piety) { // if chivalry or piety was just active
+            specialPrayerDeactivated = true; // keep track that it was deactivated
+         }
          set(() => ({
             attack1: {
                type: 'attPrayer',
@@ -148,11 +154,15 @@ export const usePrayers = create((set, get) => ({
                class: 'prayer-item-on',
             }
          }));
-         return { type: chosenPrayer.type, value: chosenPrayer.value }
+         return { type: chosenPrayer.type, value: chosenPrayer.value, specialPrayerDeactivated: specialPrayerDeactivated }
       }
    },
    changeStrengthPrayer: (prayerName) => {
       const chosenPrayer = get()[prayerName];
+      let specialPrayerDeactivated = false;
+      const chivalry = get().chivalry.active;
+      const piety = get().piety.active;
+
       if (chosenPrayer.active) { // if prayer is already on, turn it off
          set(() => ({
             [prayerName]: {
@@ -164,6 +174,9 @@ export const usePrayers = create((set, get) => ({
          }));
          return { type: chosenPrayer.type, value: 0 }
       } else { // turn every other similar prayer off, and turn chosen prayer on
+         if (chivalry || piety) { // if chivalry or piety was just active
+            specialPrayerDeactivated = true; // keep track that it was deactivated
+         }
          set(() => ({
             strength1: {
                type: 'strPrayer',
@@ -202,7 +215,7 @@ export const usePrayers = create((set, get) => ({
                class: 'prayer-item-on',
             }
          }));
-         return { type: chosenPrayer.type, value: chosenPrayer.value }
+         return { type: chosenPrayer.type, value: chosenPrayer.value, specialPrayerDeactivated: specialPrayerDeactivated }
       }
    },
    changeSpecialPrayer: (prayerName) => {

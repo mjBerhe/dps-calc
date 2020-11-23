@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import Image from 'next/image'
 import useHover from '../../../hooks/useHover';
+import SelectSearch from '../../templates/SelectSearch';
 import { useLists } from '../../../state/lists.js';
 import { useEquippedGear } from '../../../state/equippedGear.js';
 const fetch = require('node-fetch');
 
-export const SelectWeapon = React.memo(() => {
+export const SelectWeapon = () => {
 
 	const { findEquipment } = useLists();
 	const weaponList = useLists(state => state.weapon);
@@ -12,9 +14,8 @@ export const SelectWeapon = React.memo(() => {
 	const { equipItem } = useEquippedGear();
 	const equippedWeapon = useEquippedGear(state => state.weapon);
 
-	const [weaponPic, setWeaponPic] = useState(defaultWeaponImg);
+	const [weaponPic, setWeaponPic] = useState('/Equipment/WeaponSlot.png');
 	const [options, setOptions] = useState([]);
-	const [weaponID, setWeaponID] = useState(null);
 
 	// for loading weapon options in state (should only be triggered once)
 	useEffect(() => {
@@ -35,36 +36,39 @@ export const SelectWeapon = React.memo(() => {
 		}
 	}, [weaponList]);
 
-	// equipping weapon
-	useEffect(() => {
-		if (weaponID) {
-			const item = findEquipment('weapon', weaponID);
-			equipItem('weapon', item);
-		} else equipItem('weapon', 100000);
-	}, [weaponID])
-
-	// for fetching image after every select or if equipped weapon changes somehow
-	useEffect(() => {
-		async function fetchImage() {
-			const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-			const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
-			if (equippedWeapon) {
-				if (equippedWeapon.id === 100000) {
-					setWeaponPic(defaultWeaponImg);
-				} else {
-					const response = await fetch(`${proxyUrl}${url}${equippedWeapon.id}.png`);
-					setWeaponPic(response.url)
-				}
-			} else setWeaponPic(defaultWeaponImg);
+	const handleItemChange = async (item, equipType) => {
+		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
+		
+		if (item.value) { // item.value is the ID
+			const foundItem = findEquipment(equipType, item.value);
+			equipItem(equipType, foundItem);
+			console.log('equipped');
+			if (item.value !== 100000) { // fetch the equipped weapon
+				const response = await fetch(`${proxyUrl}${url}${item.value}.png`);
+				setWeaponPic(response.url);
+				console.log('finding img')
+			} else { // equip no weapon
+				equipItem(equipType, 100000);
+				setWeaponPic('/Equipment/WeaponSlot.png');
+			}
 		}
-		fetchImage();
-	}, [equippedWeapon])
+	}
 
-	const [ref, hovered] = useHover();
+	const [refWeapon, hovered] = useHover();
 
 	return(
 		<div className="weapon-slot">
-			<img src={weaponPic} alt="selected weapon" ref={ref}/>
+			<div className='item-image' ref={refWeapon}>
+				{weaponPic !== '/Equipment/WeaponSlot.png' &&
+					<img src={weaponPic} alt="weapon pic"/>
+				}
+			</div>
+			<div className='default-image'>
+				{weaponPic === '/Equipment/WeaponSlot.png' &&
+					<img src={weaponPic} alt="default weapon pic"/>
+				}
+			</div>
 			{hovered && equippedWeapon.stats &&
 				<div className="weapon-hover">
 					<h5>{equippedWeapon.name}</h5>
@@ -79,10 +83,11 @@ export const SelectWeapon = React.memo(() => {
 					<h6>{equippedWeapon.stats.prayBonus ? `Pray Bonus: ${equippedWeapon.stats.prayBonus}` : null}</h6>
 				</div>
 			}
+			<SelectSearch 
+				options={options} 
+				onChange={handleItemChange} 
+				itemType='weapon' 
+			/>
 		</div>
 	)
-})
-
-export default function defaultWeaponImg() {
-	return <img src='/Equipment/WeaponSlot.png' alt='default weapon img'/>
 }
