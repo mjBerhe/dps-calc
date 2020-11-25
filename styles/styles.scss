@@ -43,7 +43,7 @@ h5 {
 
 .grid-container {
    display: grid;
-   grid-template-rows: minmax(80px, 10vh) minmax(400px, 45vh) 45vh;
+   grid-template-rows: minmax(80px, 10vh) minmax(420px, 45vh) 45vh;
    grid-template-columns: repeat(2, minmax(500px, 50%));
 }
 

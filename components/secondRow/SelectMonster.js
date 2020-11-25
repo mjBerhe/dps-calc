@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import SelectSearch from '../templates/SelectSearch';
 import { useLists } from '../../state/lists.js';
 
-export const SelectMonster = React.memo(() => {
+export const SelectMonster = () => {
 
-	const { setCurrentMonster } = useLists();
+	const { setCurrentMonster, checkDemon, checkDragon, checkLeafy, checkUndead, checkVampyre } = useLists();
 	const monsterList = useLists(state => state.monsters);
 	const currentMonster = useLists(state => state.currentMonster);
 
@@ -32,15 +33,26 @@ export const SelectMonster = React.memo(() => {
 		}
 	}, [monsterID]);
 
-	// useEffect(() => {
-	// 	console.log(currentMonster)
-	// }, [currentMonster])
+	useEffect(() => {
+		if (currentMonster) {
+			checkDemon();
+			checkDragon();
+			checkLeafy();
+			checkUndead();
+			checkVampyre();
+		}
+	}, [currentMonster])
 
 	return(
 		<div className="monster-container">
-			<div className="monster-select">
+			<div className="monster-select-container">
+				<SelectSearch
+					options={options}
+					onChange={handleMonsterChange}
+					itemType='monster'
+				/>
 			</div>
 		</div>
 	)
-})
+}
 

@@ -17,6 +17,8 @@ export const SelectWeapon = () => {
 	const [weaponPic, setWeaponPic] = useState('/Equipment/WeaponSlot.png');
 	const [options, setOptions] = useState([]);
 
+	let noWeapon;
+
 	// for loading weapon options in state (should only be triggered once)
 	useEffect(() => {
 		const tempOptions = [];
@@ -29,27 +31,28 @@ export const SelectWeapon = () => {
 				// console.log(weapon.name)
 			})
 			setOptions(tempOptions);
-			console.log('weapon list loaded');
+			// console.log('weapon list loaded');
 
 			// equipping "none" in weapon slot when the weapon list loads
-			equipItem('weapon', 100000);
+			noWeapon = findEquipment('weapon', 100000);
+			equipItem('weapon', noWeapon);
 		}
 	}, [weaponList]);
 
-	const handleItemChange = async (item, equipType) => {
+	const handleItemChange = async (item, equipType) => { // need to catch errors if it doesnt fetch
 		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		
 		if (item.value) { // item.value is the ID
 			const foundItem = findEquipment(equipType, item.value);
 			equipItem(equipType, foundItem);
-			console.log('equipped');
+			// console.log('equipped');
 			if (item.value !== 100000) { // fetch the equipped weapon
 				const response = await fetch(`${proxyUrl}${url}${item.value}.png`);
 				setWeaponPic(response.url);
-				console.log('finding img')
+				// console.log('finding img')
 			} else { // equip no weapon
-				equipItem(equipType, 100000);
+				equipItem(equipType, noWeapon);
 				setWeaponPic('/Equipment/WeaponSlot.png');
 			}
 		}

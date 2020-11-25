@@ -1,35 +1,33 @@
 import { useEffect } from 'react';
 import { connectToDatabase } from '../util/mongoDB.js';
 import Head from 'next/head'
-import { useUserStats } from '../state/userStats.js';
+
 import { useLists } from '../state/lists.js';
+import { useUserStats } from '../state/userStats.js';
+import { useEquippedGear } from '../state/equippedGear';
 
 import Header from '../components/firstRow/Header';
 import LvlInputs from '../components/secondRow/LvlInputs';
 import PrayerSelect from '../components/secondRow/PrayerSelect';
 import PotionSelect from '../components/secondRow/PotionSelect';
-
+import DpsChart from '../components/secondRow/dpsChart';
 import { SelectMonster } from '../components/secondRow/SelectMonster';
 import { SelectWeapon } from '../components/thirdRow/SelectEquipment/SelectWeapon';
 import { SelectWeaponStyle } from '../components/thirdRow/SelectEquipment/SelectAttackStyle';
+
 
 
 export default function DpsCalc({ lists }) {
 
    const { setLists } = useLists();
 
-   // initial fetch of all equipment + monster lists
-   useEffect(() => {
+   useEffect(() => { // initial fetch of all equipment + monster lists
       setLists(lists);
    }, [])
 
-   useEffect(() => {
-      console.log(lists[1])
-   }, [lists])
-
-   // if (isConnected) {
-   //    console.log('connected to db')
-   // } else console.log('not connected to db')
+   // useEffect(() => {
+   //    console.log(lists[1])
+   // }, [lists])
 
    return (
       <div className='grid-container'>
@@ -44,6 +42,7 @@ export default function DpsCalc({ lists }) {
             </div>
             <div className="r2-second-column">
                <h2 className='r2-c2-header'>Armor Set 1 vs Armor Set 2</h2>
+               <DpsChart/>
                {/* <SelectMonster/> */}
             </div>
          </div>
@@ -106,10 +105,10 @@ export default function DpsCalc({ lists }) {
 // };
 
 export async function getServerSideProps() {
-   // connect to database
-   const { db } = await connectToDatabase();
+   
+   const { db } = await connectToDatabase(); // connect to database
 
-   const weapons = await db.collection('weapons').find().sort({ name: 1 }).limit(100).toArray();
+   const weapons = await db.collection('weapons').find().sort({ name: 1 }).toArray();
    // const shields = await db.collection('shields').find().sort({ name: 1 }).toArray();
    // const helmets = await db.collection('helmets').find().sort({ name: 1 }).toArray();
    // const chests = await db.collection('chests').find().sort({ name: 1 }).toArray();

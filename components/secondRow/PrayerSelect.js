@@ -44,9 +44,9 @@ const PrayerSelect = () => {
       }
    }
 
-   useEffect(() => {
-      console.log(attPrayerValue, strPrayerValue);
-   }, [attPrayerValue, strPrayerValue])
+   // useEffect(() => {
+   //    console.log(attPrayerValue, strPrayerValue);
+   // }, [attPrayerValue, strPrayerValue])
 
    const handleStrengthPrayer = (e) => {
       const { type, value, specialPrayerDeactivated } = changeStrengthPrayer(e.target.name);

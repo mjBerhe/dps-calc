@@ -16,3 +16,8 @@
    grid-column: 1/2;
    @include flexCenter();
 }
+
+.r2-c2-stats {
+   grid-row: 2/3;
+   grid-column: 1/2;
+}

@@ -29,21 +29,48 @@ export const useUserStats = create((set, get) => ({
    isMagic: false,
    chosenSpell: null,
    isSlayerTask: false,
-   isMonsterUndead: false,
-   isMonsterDragon: false,
-   isMonsterDemon: false,
-   isMonsterTurothKurask: false,
+   userStatCount: 0, // reference whenever a stat changes (for useEffect)
    setStat: (statType, value) => {
       set(() => ({
          [statType]: value,
+         userStatCount: get().userStatCount + 1,
       })); 
+      // console.log(`${statType} is now ${value}`);
    },
    setMultipleStats: (objectOfStats) => {
       const listOfStats = Object.keys(objectOfStats);
       listOfStats.forEach(stat => {
          set(() => ({
             [stat]: objectOfStats[stat],
+            userStatCount: get().userStatCount + 1,
          }));
+         // console.log(`${stat} is now ${objectOfStats[stat]}`);
       });
-   }
+   },
+   checkPoweredStaff: (equippedWeapon) => {
+      const listOfPoweredStaves = [11907, 11905, 22288, 12899, 22292, 22323, 22381];
+      if (listOfPoweredStaves.includes(equippedWeapon.id)) {
+         set(() => ({
+            isMagic: true,
+            attType: 'magic',
+         }));
+      } else {
+         set(() => ({
+            isMagic: false,
+         }));
+      }
+   },
+   checkRange: (equippedWeapon) => {
+      const weaponTypes = ['bows', 'crossbows', 'thrown_weapons', 'chinchompas'];
+      if (weaponTypes.includes(equippedWeapon.wepType)) {
+         set(() => ({
+            isRange: true,
+         }));
+      } else {
+         set(() => ({
+            isRange: false,
+         }));
+      }
+   },
+   
 }));

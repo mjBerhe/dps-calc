@@ -16,6 +16,8 @@
 }
 
 .r2-first-column {
+   grid-row: 1/2;
+   grid-column: 1/2;
    border: 1px solid pink;
    display: grid;
    grid-template-columns: 50% 50%;
