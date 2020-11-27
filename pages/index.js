@@ -12,7 +12,7 @@ import LvlInputs from '../components/secondRow/LvlInputs';
 import PrayerSelect from '../components/secondRow/PrayerSelect';
 import PotionSelect from '../components/secondRow/PotionSelect';
 import HeaderR2C2 from '../components/secondRow/HeaderR2C2';
-import DpsChart from '../components/secondRow/dpsChart';
+import DpsChart from '../components/secondRow/DpsChart';
 import EquipmentSelect from '../components/thirdRow/EquipmentSelect';
 import { SelectMonster } from '../components/secondRow/SelectMonster';
 
