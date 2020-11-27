@@ -61,7 +61,7 @@ h6 {
 .grid-container {
    display: grid;
    grid-template-rows: minmax(80px, 10vh) minmax(420px, 45vh) minmax(420px, 45vh);
-   grid-template-columns: repeat(2, minmax(560px, 50%));
+   grid-template-columns: repeat(2, minmax(600px, 50%));
 }
 
 .r2-container {
@@ -70,8 +70,8 @@ h6 {
    background: #4a6eacce;
    margin: 3px 0 3px 0;
    display: grid;
-   grid-template-columns: minmax(500px, 35%) minmax(500px, 65%);
    grid-template-rows: minmax(400px, 100%);
+   grid-template-columns: minmax(500px, 35%) minmax(500px, 65%);
    border: 2px solid black;
 }
 
@@ -82,6 +82,6 @@ h6 {
    margin: 3px 0 3px 0;
    border: 2px solid black;
    display: grid;
-   grid-template-columns: minmax(600px, 50%) minmax(600px, 50%);
    grid-template-rows: minmax(400px, 100%);
+   grid-template-columns: minmax(600px, 50%) minmax(600px, 50%);
 }

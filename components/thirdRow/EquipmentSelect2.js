@@ -18,7 +18,7 @@ import SelectSpell from './SelectEquipment1/SelectSpell';
 import { useUserStats } from '../../state/userStats';
 import shallow from 'zustand/shallow';
 
-const EquipmentSelect = () => {
+const EquipmentSelect2 = () => {
 
    const { isRange, isMagic } = useUserStats(state => ({
       isRange: state.isRange,
@@ -62,4 +62,4 @@ const EquipmentSelect = () => {
    );
 }
 
-export default EquipmentSelect;
+export default EquipmentSelect2;

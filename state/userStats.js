@@ -77,5 +77,4 @@ export const useUserStats = create((set, get) => ({
          }));
       }
    },
-   
 }));
