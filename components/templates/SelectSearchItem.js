@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-export default function SelectSearch({ options, onChange, itemType }) {
+export default function SelectSearchItem({ options, onChange, itemType }) {
 
    const [display, setDisplay] = useState();
    const [search, setSearch] = useState('');
@@ -41,24 +41,23 @@ export default function SelectSearch({ options, onChange, itemType }) {
    }
 
    return (
-      <div className='dropdown-container' ref={wrapperRef}>
-         <input 
-            className='dropdown-search' 
+      <div className='dropdown-item-container' ref={wrapperRef}>
+         <input  
             placeholder={`Search for ${itemType}`} 
             autoComplete='off'
-            value={search} 
+            value={search}
             onClick={handleClick}
             onChange={handleSearch}
          />
          {display &&
-            <div className='dropdown-options-container'>
+            <div className='dropdown-item-options-container'>
             {options
                .filter(({name}) => name.toLowerCase().indexOf(search.toLowerCase()) > -1)
                .map((item, i) => {
-                  return <div className='dropdown-options' key={i} tabIndex='0' onClick={() => handleChange(item, itemType)}>{item.name}</div>
+                  return <div className='dropdown-item-options' key={i} tabIndex='0' onClick={() => handleChange(item, itemType)}>{item.name}</div>
                })
             }
-         </div> 
+            </div> 
          }
       </div>
    )

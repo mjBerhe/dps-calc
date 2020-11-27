@@ -1,9 +1,8 @@
-export function calcAttSpeed(equippedGear, userStats) {
-	// if using a spell, all spells have an attack speed of 5 ticks
-	if (userStats.chosenSpell) {
-		// using Harmonised nightmare staff
-		if (userStats.chosenSpell.spellbook === 'standard' && equippedGear.weapon) {
-			if (equippedGear.weapon.id === 24423) {
+const calcAttSpeed = (equippedWeapon, chosenSpell, attStyle) => {
+
+	if (chosenSpell) { // if using a spell, all spells have an attack speed of 5 ticks
+		if (chosenSpell.spellbook === 'standard' && equippedWeapon) { 
+			if (equippedWeapon.id === 24423) { // Harmonised nightmare staff
 				return 4;
 			} else {
 				return 5;
@@ -11,13 +10,15 @@ export function calcAttSpeed(equippedGear, userStats) {
 		} else {
 			return 5;
 		}
-	} else if (equippedGear.weapon) {
-		if (userStats.attStyle === "rapid" || userStats.attStyle === 'medium fuse') {
-			return equippedGear.weapon.attSpeed - 1;
+	} else if (equippedWeapon) {
+		if (attStyle === "rapid" || attStyle === 'medium fuse') {
+			return equippedWeapon.attSpeed - 1;
 		} else {
-			return equippedGear.weapon.attSpeed;
+			return equippedWeapon.attSpeed;
 		}
 	 } else {
 	 	return null;
 	}
 }
+
+export default calcAttSpeed;

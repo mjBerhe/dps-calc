@@ -44,6 +44,7 @@ const calcMaxHit = (statObject, equipmentObject, monsterObject) => {
 			maxHit = chosenSpell.maxHit;
 			if (chosenSpell.grade === 'bolt' && isChaosGauntlets) {
 				maxHit += 3;
+				console.log('chaos gauntlets activated')
 			}
 		// else a powered staff must be equipped
 		} else {
@@ -51,10 +52,13 @@ const calcMaxHit = (statObject, equipmentObject, monsterObject) => {
 			const visibleMagicLvl = effectiveStrLvl - 8;
 			if (equippedWeapon.id === 11907 || equippedWeapon.id === 11905 || equippedWeapon.id === 22288) { // trident of the seas
 				maxHit = 20 + Math.floor((visibleMagicLvl - 75)/3);
+				console.log('trident')
 			} else if (equippedWeapon.id === 12899 || equippedWeapon.id === 22292) { // trident of the swamp
 				maxHit = 23 + Math.floor((visibleMagicLvl - 75)/3);
+				console.log('trident')
 			} else if (equippedWeapon.id === 22323 || equippedWeapon.id === 22381) { // sanguinesti staff
 				maxHit = 24 + Math.floor((visibleMagicLvl - 75)/3);
+				console.log('trident')
 			}
 		}
 
@@ -87,7 +91,6 @@ const calcMaxHit = (statObject, equipmentObject, monsterObject) => {
 				maxHit = Math.floor(maxHit*1.5);
 			}
 		}
-
 		return Math.floor(maxHit);
  
 	} else { // else we assume its melee

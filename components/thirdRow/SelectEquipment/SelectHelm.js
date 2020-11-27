@@ -1,116 +1,87 @@
-import React, { useState, useEffect } from 'react';
-import helmImg from "../../images/Equipment/HelmSlot.png";
-import { Select } from 'react-select-virtualized';
-import { customStyles1 } from "./Styles/SelectStyle1";
+import { useState, useEffect } from 'react';
+import SelectSearchItem from '../../templates/SelectSearchItem';
+import { useLists } from '../../../state/lists.js';
+import { useEquippedGear } from '../../../state/equippedGear.js';
 import useHover from '../../../hooks/useHover';
 const fetch = require('node-fetch');
 
-export const SelectHelm = React.memo(({ handleEquipmentChange, equipmentList, equippedGear }) => {
+const SelectHelm = () => {
 
-	// NEED equipmentList for loading helm options (contains names + id's)
-	// NEED handleEquipmentChange for equippingGear after a select
+	const { findEquipment } = useLists();
+	const helmList = useLists(state => state.helm);
 
-	const [select, setSelect] = useState({
-		name: 'helm',
-		VCWidth: 0,
-		VCHeight: 0,
-		VCOpacity: 1,
-		options: [],
-	})
+	const { equipItem } = useEquippedGear();
+	const equippedHelm = useEquippedGear(state => state.helm);
 
-	const [pic, setPic] = useState(helmImg);
+	const defaultHelmPic = '/Equipment/HelmSlot.png';
+	const [helmPic, setHelmPic] = useState(defaultHelmPic);
+	const [options, setOptions] = useState([]);
 
 	// for loading options in state (should only be triggered once)
 	useEffect(() => {
-		const loadOptions = () => {
-			const options = [];
-			if (equipmentList.helm) {
-				equipmentList.helm.forEach((helm) => {
-					options.push({
-						label: helm.name,
-						value: helm.id,
-					})
-				})
-
-				setSelect((prevSelect) => ({
-					...prevSelect,
-					options: options,
-				}))
-			}
+		const tempOptions = [];
+		if (helmList) {
+			helmList.forEach(helm => {
+				tempOptions.push({
+					name: helm.name,
+					value: helm.id,
+				});
+			});
+			setOptions(tempOptions);
 		}
-		loadOptions();
-	}, [equipmentList.helm])
+	}, [helmList])
 
-	// for fetching image and equipping item after every select
-	useEffect(() => {
-		async function fetchImage() {
-			const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-			const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
-			let id;
-			if (equippedGear.helm) {
-				id = equippedGear.helm.id;
-				const response = await fetch(`${proxyUrl}${url}${id}.png`);
-				setPic(response.url);
-			} else {
-				setPic(helmImg);
-			}
+	const handleItemChange = async (item, equipType) => { // need to catch errors if it doesnt fetch
+		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
+		
+		if (item.value) { // item.value is the ID
+			const foundItem = findEquipment(equipType, item.value);
+			equipItem(equipType, foundItem);
+			console.log('equipped');
+
+			const response = await fetch(`${proxyUrl}${url}${item.value}.png`);
+			setHelmPic(response.url);
+		} else { // equip no helm
+			setHelmPic(defaultHelmPic);
 		}
-		fetchImage();
-	}, [equippedGear.helm])
-
-	const handleChange = helm => {
-		if (helm) {
-			handleEquipmentChange('helm', helm.value);
-		}
-	}
-
-	const handleMenuOpen = () => {
-		setSelect(prevSelect => ({
-			...prevSelect,
-			VCWidth: 180,
-			VCHeight: "auto",
-			VCOpacity: 1,
-		}))
-	}
-
-	const handleMenuClose = () => {
-		setSelect(prevSelect => ({
-			...prevSelect,
-			VCWidth: 0,
-			VCHeight: 0,
-			VCOpacity: 0,
-		}))
 	}
 
 	const [ref, hovered] = useHover();
 
 	return(
 		<div className="helm-slot">
-			<img src={pic} alt="selected helm" ref={ref}/>
-			{hovered && equippedGear.helm && 
-				<div className='helm-hover'>
-					<h5>{equippedGear.helm.name}</h5>
-					<h6>{equippedGear.helm.stats.attStab ? `Stab Att: ${equippedGear.helm.stats.attStab}` : null}</h6>
-					<h6>{equippedGear.helm.stats.attSlash ? `Slash Att: ${equippedGear.helm.stats.attSlash}` : null}</h6>
-					<h6>{equippedGear.helm.stats.attCrush ? `Crush Att: ${equippedGear.helm.stats.attCrush}` : null}</h6>
-					<h6>{equippedGear.helm.stats.attMagic ? `Magic Att: ${equippedGear.helm.stats.attMagic}` : null}</h6>
-					<h6>{equippedGear.helm.stats.attRanged ? `Range Att: ${equippedGear.helm.stats.attRanged}` : null}</h6>
-					<h6>{equippedGear.helm.stats.strBonus ? `Melee Str: ${equippedGear.helm.stats.strBonus}` : null}</h6>
-					<h6>{equippedGear.helm.stats.rngStrBonus ? `Range Str: ${equippedGear.helm.stats.rngStrBonus}` : null}</h6>
-					<h6>{equippedGear.helm.stats.magBonus ? `Magic Dmg: ${equippedGear.helm.stats.magBonus}` : null}</h6>
-					<h6>{equippedGear.helm.stats.prayBonus ? `Pray Bonus: ${equippedGear.helm.stats.prayBonus}` : null}</h6>
+			<div className='item-image' ref={ref}>
+				{helmPic !== defaultHelmPic &&
+					<img src={helmPic} alt="weapon pic"/>
+				}
+			</div>
+			<div className='default-image'>
+				{helmPic === defaultHelmPic &&
+					<img src={helmPic} alt="default weapon pic"/>
+				}
+			</div>
+			{hovered && equippedHelm && 
+				<div className='equipment-item-hover'>
+					<h5>{equippedHelm.name}</h5>
+					<h6>{equippedHelm.stats.attStab ? `Stab Att: ${equippedHelm.stats.attStab}` : null}</h6>
+					<h6>{equippedHelm.stats.attSlash ? `Slash Att: ${equippedHelm.stats.attSlash}` : null}</h6>
+					<h6>{equippedHelm.stats.attCrush ? `Crush Att: ${equippedHelm.stats.attCrush}` : null}</h6>
+					<h6>{equippedHelm.stats.attMagic ? `Magic Att: ${equippedHelm.stats.attMagic}` : null}</h6>
+					<h6>{equippedHelm.stats.attRanged ? `Range Att: ${equippedHelm.stats.attRanged}` : null}</h6>
+					<h6>{equippedHelm.stats.strBonus ? `Melee Str: ${equippedHelm.stats.strBonus}` : null}</h6>
+					<h6>{equippedHelm.stats.rngStrBonus ? `Range Str: ${equippedHelm.stats.rngStrBonus}` : null}</h6>
+					<h6>{equippedHelm.stats.magBonus ? `Magic Dmg: ${equippedHelm.stats.magBonus}` : null}</h6>
+					<h6>{equippedHelm.stats.prayBonus ? `Pray Bonus: ${equippedHelm.stats.prayBonus}` : null}</h6>
 				</div>
 			}
-			<Select
-				className="helm-select"
-				placeholder="Search for Helm"
-				isSearchable
-				onChange={(selectedOption) => handleChange(selectedOption)}
-				onMenuOpen={() => handleMenuOpen()}
-				onMenuClose={() => handleMenuClose()}
-				options={select.options}
-				styles={customStyles1(select)}
+			<SelectSearchItem 
+				options={options} 
+				onChange={handleItemChange} 
+				itemType='helm' 
 			/>
 		</div>	
 	)
-})
+}
+
+export default SelectHelm;

@@ -1,116 +1,87 @@
-import React, { useState, useEffect } from 'react';
-import neckImg from "../../images/Equipment/NeckSlot.png";
-import { Select } from 'react-select-virtualized';
-import { customStyles1 } from "./Styles/SelectStyle1";
-import useHover from '../../hooks/useHover';
+import { useState, useEffect } from 'react';
+import SelectSearchItem from '../../templates/SelectSearchItem';
+import { useLists } from '../../../state/lists.js';
+import { useEquippedGear } from '../../../state/equippedGear.js';
+import useHover from '../../../hooks/useHover';
 const fetch = require('node-fetch');
 
-export const SelectNeck = React.memo(({ handleEquipmentChange, equipmentList, equippedGear }) => {
+const SelectNeck = () => {
 
-	// NEED equipmentList for loading neck options (contains names + id's)
-	// NEED handleEquipmentChange for equippingGear after a select
+	const { findEquipment } = useLists();
+	const neckList = useLists(state => state.neck);
 
-	const [select, setSelect] = useState({
-		name: 'neck',
-		VCWidth: 0,
-		VCHeight: 0,
-		VCOpacity: 1,
-		options: [],
-	})
+	const { equipItem } = useEquippedGear();
+	const equippedNeck = useEquippedGear(state => state.neck);
 
-	const [pic, setPic] = useState(neckImg);
+	const defaultNeckPic = '/Equipment/NeckSlot.png';
+	const [neckPic, setNeckPic] = useState(defaultNeckPic);
+	const [options, setOptions] = useState([]);
 
 	// for loading options in state (should only be triggered once)
 	useEffect(() => {
-		const loadOptions = () => {
-			const options = [];
-			if (equipmentList.neck) {
-				equipmentList.neck.forEach((neck) => {
-					options.push({
-						label: neck.name,
-						value: neck.id,
-					})
-				})
-
-				setSelect((prevSelect) => ({
-					...prevSelect,
-					options: options,
-				}))
-			}
+		const tempOptions = [];
+		if (neckList) {
+			neckList.forEach(neck => {
+				tempOptions.push({
+					name: neck.name,
+					value: neck.id,
+				});
+			});
+			setOptions(tempOptions);
 		}
-		loadOptions();
-	}, [equipmentList.neck])
+	}, [neckList])
 
-	// for fetching image and equipping item after every select
-	useEffect(() => {
-		async function fetchImage() {
-			const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-			const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
-			let id;
-			if (equippedGear.neck) {
-				id = equippedGear.neck.id;
-				const response = await fetch(`${proxyUrl}${url}${id}.png`);
-				setPic(response.url);
-			} else {
-				setPic(neckImg);
-			}
+	const handleItemChange = async (item, equipType) => { // need to catch errors if it doesnt fetch
+		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
+		
+		if (item.value) { // item.value is the ID
+			const foundItem = findEquipment(equipType, item.value);
+			equipItem(equipType, foundItem);
+			console.log('equipped');
+
+			const response = await fetch(`${proxyUrl}${url}${item.value}.png`);
+			setNeckPic(response.url);
+		} else { // equip no neck
+			setNeckPic(defaultNeckPic);
 		}
-		fetchImage();
-	}, [equippedGear.neck])
-
-	const handleChange = neck => {
-		if (neck) {
-			handleEquipmentChange('neck', neck.value);
-		}
-	}
-
-	const handleMenuOpen = () => {
-		setSelect(prevSelect => ({
-			...prevSelect,
-			VCWidth: 180,
-			VCHeight: "auto",
-			VCOpacity: 1,
-		}))
-	}
-
-	const handleMenuClose = () => {
-		setSelect(prevSelect => ({
-			...prevSelect,
-			VCWidth: 0,
-			VCHeight: 0,
-			VCOpacity: 0,
-		}))
 	}
 
 	const [ref, hovered] = useHover();
 
 	return(
 		<div className="neck-slot">
-			<img src={pic} alt="selected neck" ref={ref}/>
-			{hovered && equippedGear.neck && 
-				<div className='neck-hover'>
-					<h5>{equippedGear.neck.name}</h5>
-					<h6>{equippedGear.neck.stats.attStab ? `Stab Att: ${equippedGear.neck.stats.attStab}` : null}</h6>
-					<h6>{equippedGear.neck.stats.attSlash ? `Slash Att: ${equippedGear.neck.stats.attSlash}` : null}</h6>
-					<h6>{equippedGear.neck.stats.attCrush ? `Crush Att: ${equippedGear.neck.stats.attCrush}` : null}</h6>
-					<h6>{equippedGear.neck.stats.attMagic ? `Magic Att: ${equippedGear.neck.stats.attMagic}` : null}</h6>
-					<h6>{equippedGear.neck.stats.attRanged ? `Range Att: ${equippedGear.neck.stats.attRanged}` : null}</h6>
-					<h6>{equippedGear.neck.stats.strBonus ? `Melee Str: ${equippedGear.neck.stats.strBonus}` : null}</h6>
-					<h6>{equippedGear.neck.stats.rngStrBonus ? `Range Str: ${equippedGear.neck.stats.rngStrBonus}` : null}</h6>
-					<h6>{equippedGear.neck.stats.magBonus ? `Magic Dmg: ${equippedGear.neck.stats.magBonus}` : null}</h6>
-					<h6>{equippedGear.neck.stats.prayBonus ? `Pray Bonus: ${equippedGear.neck.stats.prayBonus}` : null}</h6>
+			<div className='item-image' ref={ref}>
+				{neckPic !== defaultNeckPic &&
+					<img src={neckPic} alt="weapon pic"/>
+				}
+			</div>
+			<div className='default-image'>
+				{neckPic === defaultNeckPic &&
+					<img src={neckPic} alt="default weapon pic"/>
+				}
+			</div>
+			{hovered && equippedNeck && 
+				<div className='equipment-item-hover'>
+					<h5>{equippedNeck.name}</h5>
+					<h6>{equippedNeck.stats.attStab ? `Stab Att: ${equippedNeck.stats.attStab}` : null}</h6>
+					<h6>{equippedNeck.stats.attSlash ? `Slash Att: ${equippedNeck.stats.attSlash}` : null}</h6>
+					<h6>{equippedNeck.stats.attCrush ? `Crush Att: ${equippedNeck.stats.attCrush}` : null}</h6>
+					<h6>{equippedNeck.stats.attMagic ? `Magic Att: ${equippedNeck.stats.attMagic}` : null}</h6>
+					<h6>{equippedNeck.stats.attRanged ? `Range Att: ${equippedNeck.stats.attRanged}` : null}</h6>
+					<h6>{equippedNeck.stats.strBonus ? `Melee Str: ${equippedNeck.stats.strBonus}` : null}</h6>
+					<h6>{equippedNeck.stats.rngStrBonus ? `Range Str: ${equippedNeck.stats.rngStrBonus}` : null}</h6>
+					<h6>{equippedNeck.stats.magBonus ? `Magic Dmg: ${equippedNeck.stats.magBonus}` : null}</h6>
+					<h6>{equippedNeck.stats.prayBonus ? `Pray Bonus: ${equippedNeck.stats.prayBonus}` : null}</h6>
 				</div>
 			}
-			<Select
-				className="neck-select"
-				placeholder="Search for Neck"
-				isSearchable
-				onChange={(selectedOption) => handleChange(selectedOption)}
-				onMenuOpen={() => handleMenuOpen()}
-				onMenuClose={() => handleMenuClose()}
-				options={select.options}
-				styles={customStyles1(select)}
+			<SelectSearchItem 
+				options={options} 
+				onChange={handleItemChange} 
+				itemType='neck' 
 			/>
 		</div>	
 	)
-})
+}
+
+export default SelectNeck;

@@ -1,116 +1,87 @@
-import React, { useState, useEffect } from 'react';
-import legImg from "../../images/Equipment/LegSlot.png";
-import { Select } from 'react-select-virtualized';
-import { customStyles1 } from "./Styles/SelectStyle1";
-import useHover from '../../hooks/useHover';
+import { useState, useEffect } from 'react';
+import SelectSearchItem from '../../templates/SelectSearchItem';
+import { useLists } from '../../../state/lists.js';
+import { useEquippedGear } from '../../../state/equippedGear.js';
+import useHover from '../../../hooks/useHover';
 const fetch = require('node-fetch');
 
-export const SelectLeg = React.memo(({ handleEquipmentChange, equipmentList, equippedGear }) => {
+const SelectLeg = () => {
 
-	// NEED equipmentList for loading leg options (contains names + id's)
-	// NEED handleEquipmentChange for equippingGear after a select
+	const { findEquipment } = useLists();
+	const legList = useLists(state => state.leg);
 
-	const [select, setSelect] = useState({
-		name: 'leg',
-		VCWidth: 0,
-		VCHeight: 0,
-		VCOpacity: 1,
-		options: [],
-	})
+	const { equipItem } = useEquippedGear();
+	const equippedLeg = useEquippedGear(state => state.leg);
 
-	const [pic, setPic] = useState(legImg);
+	const defaultLegPic = '/Equipment/LegSlot.png';
+	const [legPic, setLegPic] = useState(defaultLegPic);
+	const [options, setOptions] = useState([]);
 
 	// for loading options in state (should only be triggered once)
 	useEffect(() => {
-		const loadOptions = () => {
-			const options = [];
-			if (equipmentList.leg) {
-				equipmentList.leg.forEach((leg) => {
-					options.push({
-						label: leg.name,
-						value: leg.id,
-					})
-				})
-
-				setSelect((prevSelect) => ({
-					...prevSelect,
-					options: options,
-				}))
-			}
+		const tempOptions = [];
+		if (legList) {
+			legList.forEach(leg => {
+				tempOptions.push({
+					name: leg.name,
+					value: leg.id,
+				});
+			});
+			setOptions(tempOptions);
 		}
-		loadOptions();
-	}, [equipmentList.leg])
+	}, [legList])
 
-	// for fetching image and equipping item after every select
-	useEffect(() => {
-		async function fetchImage() {
-			const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-			const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
-			let id;
-			if (equippedGear.leg) {
-				id = equippedGear.leg.id;
-				const response = await fetch(`${proxyUrl}${url}${id}.png`);
-				setPic(response.url)
-			} else {
-				setPic(legImg);
-			}
+	const handleItemChange = async (item, equipType) => { // need to catch errors if it doesnt fetch
+		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
+		
+		if (item.value) { // item.value is the ID
+			const foundItem = findEquipment(equipType, item.value);
+			equipItem(equipType, foundItem);
+			console.log('equipped');
+
+			const response = await fetch(`${proxyUrl}${url}${item.value}.png`);
+			setLegPic(response.url);
+		} else { // equip no leg
+			setLegPic(defaultLegPic);
 		}
-		fetchImage();
-	}, [equippedGear.leg])
-
-	const handleChange = leg => {
-		if (leg) {
-			handleEquipmentChange('leg', leg.value);
-		}
-	}
-
-	const handleMenuOpen = () => {
-		setSelect(prevSelect => ({
-			...prevSelect,
-			VCWidth: 180,
-			VCHeight: "auto",
-			VCOpacity: 1,
-		}))
-	}
-
-	const handleMenuClose = () => {
-		setSelect(prevSelect => ({
-			...prevSelect,
-			VCWidth: 0,
-			VCHeight: 0,
-			VCOpacity: 0,
-		}))
 	}
 
 	const [ref, hovered] = useHover();
 
 	return(
 		<div className="leg-slot">
-			<img src={pic} alt="selected leg" ref={ref}/>
-			{hovered && equippedGear.leg && 
-				<div className='leg-hover'>
-					<h5>{equippedGear.leg.name}</h5>
-					<h6>{equippedGear.leg.stats.attStab ? `Stab Att: ${equippedGear.leg.stats.attStab}` : null}</h6>
-					<h6>{equippedGear.leg.stats.attSlash ? `Slash Att: ${equippedGear.leg.stats.attSlash}` : null}</h6>
-					<h6>{equippedGear.leg.stats.attCrush ? `Crush Att: ${equippedGear.leg.stats.attCrush}` : null}</h6>
-					<h6>{equippedGear.leg.stats.attMagic ? `Magic Att: ${equippedGear.leg.stats.attMagic}` : null}</h6>
-					<h6>{equippedGear.leg.stats.attRanged ? `Range Att: ${equippedGear.leg.stats.attRanged}` : null}</h6>
-					<h6>{equippedGear.leg.stats.strBonus ? `Melee Str: ${equippedGear.leg.stats.strBonus}` : null}</h6>
-					<h6>{equippedGear.leg.stats.rngStrBonus ? `Range Str: ${equippedGear.leg.stats.rngStrBonus}` : null}</h6>
-					<h6>{equippedGear.leg.stats.magBonus ? `Magic Dmg: ${equippedGear.leg.stats.magBonus}` : null}</h6>
-					<h6>{equippedGear.leg.stats.prayBonus ? `Pray Bonus: ${equippedGear.leg.stats.prayBonus}` : null}</h6>
+			<div className='item-image' ref={ref}>
+				{legPic !== defaultLegPic &&
+					<img src={legPic} alt="weapon pic"/>
+				}
+			</div>
+			<div className='default-image'>
+				{legPic === defaultLegPic &&
+					<img src={legPic} alt="default weapon pic"/>
+				}
+			</div>
+			{hovered && equippedLeg && 
+				<div className='equipment-item-hover'>
+					<h5>{equippedLeg.name}</h5>
+					<h6>{equippedLeg.stats.attStab ? `Stab Att: ${equippedLeg.stats.attStab}` : null}</h6>
+					<h6>{equippedLeg.stats.attSlash ? `Slash Att: ${equippedLeg.stats.attSlash}` : null}</h6>
+					<h6>{equippedLeg.stats.attCrush ? `Crush Att: ${equippedLeg.stats.attCrush}` : null}</h6>
+					<h6>{equippedLeg.stats.attMagic ? `Magic Att: ${equippedLeg.stats.attMagic}` : null}</h6>
+					<h6>{equippedLeg.stats.attRanged ? `Range Att: ${equippedLeg.stats.attRanged}` : null}</h6>
+					<h6>{equippedLeg.stats.strBonus ? `Melee Str: ${equippedLeg.stats.strBonus}` : null}</h6>
+					<h6>{equippedLeg.stats.rngStrBonus ? `Range Str: ${equippedLeg.stats.rngStrBonus}` : null}</h6>
+					<h6>{equippedLeg.stats.magBonus ? `Magic Dmg: ${equippedLeg.stats.magBonus}` : null}</h6>
+					<h6>{equippedLeg.stats.prayBonus ? `Pray Bonus: ${equippedLeg.stats.prayBonus}` : null}</h6>
 				</div>
 			}
-			<Select
-				className="leg-select"
-				placeholder="Search for Legs"
-				isSearchable
-				onChange={(selectedOption) => handleChange(selectedOption)}
-				onMenuOpen={() => handleMenuOpen()}
-				onMenuClose={() => handleMenuClose()}
-				options={select.options}
-				styles={customStyles1(select)}
+			<SelectSearchItem 
+				options={options} 
+				onChange={handleItemChange} 
+				itemType='leg' 
 			/>
 		</div>	
 	)
-})
+}
+
+export default SelectLeg;

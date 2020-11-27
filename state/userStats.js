@@ -12,9 +12,17 @@ export const useUserStats = create((set, get) => ({
       magic: null,
       range: null,
    },
+   equipmentDefBonus: {
+      stab: null,
+      slash: null,
+      crush: null,
+      magic: null,
+      range: null,
+   },
    equipmentMeleeStrBonus: null,
    equipmentRangeStrBonus: null,
    equipmentMagicDmgBonus: null,
+   equipmentPrayerBonus: null,
    attPotion: 0,
    attPrayer: 0,
    strPotion: 0,
@@ -54,10 +62,6 @@ export const useUserStats = create((set, get) => ({
             isMagic: true,
             attType: 'magic',
          }));
-      } else {
-         set(() => ({
-            isMagic: false,
-         }));
       }
    },
    checkRange: (equippedWeapon) => {
@@ -66,6 +70,7 @@ export const useUserStats = create((set, get) => ({
          set(() => ({
             isRange: true,
          }));
+         console.log('ranged weapon equipped')
       } else {
          set(() => ({
             isRange: false,

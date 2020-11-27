@@ -9,29 +9,18 @@ export const SelectMonster = () => {
 	const currentMonster = useLists(state => state.currentMonster);
 
 	const [options, setOptions] = useState([]);
-	const [monsterID, setMonsterID] = useState(null);
 
 	// when monsterList loads, create and set the list of options
 	useEffect(() => {
-		const tempOptions = [];
 		if (monsterList) {
-			monsterList.forEach(monster => {
-				tempOptions.push({
-					name: monster.name,
-					value: monster.id,
-				});
-			});
-			setOptions(tempOptions);
-			console.log('monster list loaded')
+			setOptions(monsterList);
+			// console.log('monster list loaded');
 		}
 	}, [monsterList]);
 
-	// setting the monster when chosen from the list of options
-	useEffect(() => {
-		if (monsterID) {
-			setCurrentMonster(monsterID);
-		}
-	}, [monsterID]);
+	const handleMonsterChange = (monster, type) => {
+		setCurrentMonster(monster);
+	}
 
 	useEffect(() => {
 		if (currentMonster) {
@@ -41,17 +30,16 @@ export const SelectMonster = () => {
 			checkUndead();
 			checkVampyre();
 		}
+		console.log(currentMonster);
 	}, [currentMonster])
 
 	return(
-		<div className="monster-container">
-			<div className="monster-select-container">
-				<SelectSearch
-					options={options}
-					onChange={handleMonsterChange}
-					itemType='monster'
-				/>
-			</div>
+		<div className="r2-c2-monster-container">
+			<SelectSearch
+				options={options}
+				onChange={handleMonsterChange}
+				itemType='monster'
+			/>
 		</div>
 	)
 }

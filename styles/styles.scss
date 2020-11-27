@@ -35,16 +35,33 @@ h2 {
    color: $blackColor;
 }
 
+h3 {
+   font-size: 1.1em;
+   font-weight: bold;
+   color: $blackColor;
+}
+
+h4 {
+   font-size: 0.9em;
+   font-weight: normal;
+}
+
 h5 {
    font-size: 0.75em;
    font-weight: bold;
    color: $blackColor;
 }
 
+h6 {
+   font-size: 0.7em;
+   font-weight: normal;
+   color: $blackColor;
+}
+
 .grid-container {
    display: grid;
-   grid-template-rows: minmax(80px, 10vh) minmax(420px, 45vh) 45vh;
-   grid-template-columns: repeat(2, minmax(500px, 50%));
+   grid-template-rows: minmax(80px, 10vh) minmax(420px, 45vh) minmax(420px, 45vh);
+   grid-template-columns: repeat(2, minmax(560px, 50%));
 }
 
 .r2-container {
@@ -64,4 +81,7 @@ h5 {
    background: #9DB6E1;
    margin: 3px 0 3px 0;
    border: 2px solid black;
+   display: grid;
+   grid-template-columns: minmax(600px, 50%) minmax(600px, 50%);
+   grid-template-rows: minmax(400px, 100%);
 }

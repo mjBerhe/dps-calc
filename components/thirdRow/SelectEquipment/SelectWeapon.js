@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import Image from 'next/image'
 import useHover from '../../../hooks/useHover';
-import SelectSearch from '../../templates/SelectSearch';
+import SelectSearchItem from '../../templates/SelectSearchItem';
 import { useLists } from '../../../state/lists.js';
 import { useEquippedGear } from '../../../state/equippedGear.js';
 const fetch = require('node-fetch');
 
-export const SelectWeapon = () => {
+const SelectWeapon = () => {
 
 	const { findEquipment } = useLists();
 	const weaponList = useLists(state => state.weapon);
@@ -14,7 +13,8 @@ export const SelectWeapon = () => {
 	const { equipItem } = useEquippedGear();
 	const equippedWeapon = useEquippedGear(state => state.weapon);
 
-	const [weaponPic, setWeaponPic] = useState('/Equipment/WeaponSlot.png');
+	const defaultWeaponPic = '/Equipment/WeaponSlot.png';
+	const [weaponPic, setWeaponPic] = useState(defaultWeaponPic);
 	const [options, setOptions] = useState([]);
 
 	let noWeapon;
@@ -28,10 +28,8 @@ export const SelectWeapon = () => {
 					name: weapon.name,
 					value: weapon.id,
 				});
-				// console.log(weapon.name)
 			})
 			setOptions(tempOptions);
-			// console.log('weapon list loaded');
 
 			// equipping "none" in weapon slot when the weapon list loads
 			noWeapon = findEquipment('weapon', 100000);
@@ -53,27 +51,27 @@ export const SelectWeapon = () => {
 				// console.log('finding img')
 			} else { // equip no weapon
 				equipItem(equipType, noWeapon);
-				setWeaponPic('/Equipment/WeaponSlot.png');
+				setWeaponPic(defaultWeaponPic);
 			}
 		}
 	}
 
-	const [refWeapon, hovered] = useHover();
+	const [ref, hovered] = useHover();
 
 	return(
 		<div className="weapon-slot">
-			<div className='item-image' ref={refWeapon}>
-				{weaponPic !== '/Equipment/WeaponSlot.png' &&
+			<div className='item-image' ref={ref}>
+				{weaponPic !== defaultWeaponPic &&
 					<img src={weaponPic} alt="weapon pic"/>
 				}
 			</div>
 			<div className='default-image'>
-				{weaponPic === '/Equipment/WeaponSlot.png' &&
+				{weaponPic === defaultWeaponPic &&
 					<img src={weaponPic} alt="default weapon pic"/>
 				}
 			</div>
 			{hovered && equippedWeapon.stats &&
-				<div className="weapon-hover">
+				<div className="equipment-item-hover">
 					<h5>{equippedWeapon.name}</h5>
 					<h6>{equippedWeapon.stats.attStab ? `Stab Att: ${equippedWeapon.stats.attStab}` : null}</h6>
 					<h6>{equippedWeapon.stats.attSlash ? `Slash Att: ${equippedWeapon.stats.attSlash}` : null}</h6>
@@ -86,7 +84,7 @@ export const SelectWeapon = () => {
 					<h6>{equippedWeapon.stats.prayBonus ? `Pray Bonus: ${equippedWeapon.stats.prayBonus}` : null}</h6>
 				</div>
 			}
-			<SelectSearch 
+			<SelectSearchItem 
 				options={options} 
 				onChange={handleItemChange} 
 				itemType='weapon' 
@@ -94,3 +92,5 @@ export const SelectWeapon = () => {
 		</div>
 	)
 }
+
+export default SelectWeapon;

@@ -11,6 +11,7 @@ import calcMaxAttRoll from '../../formulas/maxAttRoll';
 import calcMaxDefRoll from '../../formulas/maxDefRoll';
 import calcMaxHit from '../../formulas/maxHit';
 import calcHitChance from '../../formulas/accuracy';
+import calcAttSpeed from '../../formulas/attSpeed.js';
 
 const DpsChart = () => {
 
@@ -24,7 +25,7 @@ const DpsChart = () => {
       equipmentAttBonus: state.equipmentAttBonus,
       equipmentMeleeStrBonus: state.equipmentMeleeStrBonus,
       equipmentRangeStrBonus: state.equipmentRangeStrBonus,
-      equipmentMagicDmgBonus: state.equipmentRangeStrBonus,
+      equipmentMagicDmgBonus: state.equipmentMagicStrBonus,
 		attPotion: state.attPotion,
       attPrayer: state.attPrayer,
       strPotion: state.strPotion,
@@ -81,18 +82,19 @@ const DpsChart = () => {
    }), shallow);
 
    const { setFinalStat } = useFinalStats();
-   const { effectiveAttLvl, effectiveStrLvl, maxAttRoll, maxDefRoll, maxHit, accuracy, dps } = useFinalStats(state => ({
+   const { effectiveAttLvl, effectiveStrLvl, maxAttRoll, maxDefRoll, maxHit, accuracy, attSpeed, dps } = useFinalStats(state => ({
       effectiveAttLvl: state.effectiveAttLvl,
       effectiveStrLvl: state.effectiveStrLvl,
       maxAttRoll: state.maxAttRoll,
       maxDefRoll: state.maxDefRoll,
       maxHit: state.maxHit,
       accuracy: state.accuracy,
+      attSpeed: state.attSpeed,
       dps: state.dps,
    }), shallow);
 
    useEffect(() => { // gets called after an equipment change
-      const { totalStabAttBonus, totalSlashAttBonus, totalCrushAttBonus, totalMagicAttBonus, totalRangeAttBonus, totalMeleeStrBonus, totalRangeStrBonus, totalMagicDmgBonus } = calcTotalBonuses();
+      const { totalStabAttBonus, totalSlashAttBonus, totalCrushAttBonus, totalMagicAttBonus, totalRangeAttBonus, totalStabDefBonus, totalSlashDefBonus, totalCrushDefBonus, totalMagicDefBonus, totalRangeDefBonus, totalMeleeStrBonus, totalRangeStrBonus, totalMagicDmgBonus, totalPrayerBonus } = calcTotalBonuses();
       setMultipleStats({
          equipmentAttBonus: {
             stab: totalStabAttBonus,
@@ -101,9 +103,17 @@ const DpsChart = () => {
             magic: totalMagicAttBonus,
             range: totalRangeAttBonus,
          },
+         equipmentDefBonus: {
+            stab: totalStabDefBonus,
+            slash: totalSlashDefBonus,
+            crush: totalCrushDefBonus,
+            magic: totalMagicDefBonus,
+            range: totalRangeDefBonus,
+         },
          equipmentMeleeStrBonus: totalMeleeStrBonus,
          equipmentRangeStrBonus: totalRangeStrBonus,
-         equipmentMagicDmgBonus: totalMagicDmgBonus
+         equipmentMagicDmgBonus: totalMagicDmgBonus,
+         equipmentPrayerBonus: totalPrayerBonus,
       });
 
       if (equippedWeapon) { // basically filter special status's from a weapon equip
@@ -128,8 +138,8 @@ const DpsChart = () => {
       }
    }, [equipmentHasChanged]);
 
-   useEffect(() => { // gets called after a user stats change or an equipment change
-      const effectiveAttLvl = calcEffectiveAttLvl({
+   useEffect(() => { // runs after user stats change or an equipment change
+      const tempEffectiveAttLvl = calcEffectiveAttLvl({
          attackLvl: parseInt(attackLvl, 10), 
          rangeLvl: parseInt(rangeLvl, 10),
          magicLvl: parseInt(magicLvl, 10),
@@ -149,10 +159,9 @@ const DpsChart = () => {
          isVoidMage: isVoidMage,
          isVoidMageElite: isVoidMageElite,
       });
-      // console.log(effectiveAttLvl);
-      setFinalStat('effectiveAttLvl', effectiveAttLvl);
+      setFinalStat('effectiveAttLvl', tempEffectiveAttLvl);
 
-      const effectiveStrLvl = calcEffectiveStrLvl({
+      const tempEffectiveStrLvl = calcEffectiveStrLvl({
          strengthLvl: parseInt(strengthLvl, 10), 
          rangeLvl: parseInt(rangeLvl, 10),
          magicLvl: parseInt(magicLvl, 10),
@@ -169,13 +178,11 @@ const DpsChart = () => {
          isVoidRange: isVoidRange,
          isVoidRangeElite: isVoidRangeElite,
       });
-      setFinalStat('effectiveStrLvl', effectiveStrLvl);
-      // console.log(effectiveStrLvl);
-
+      setFinalStat('effectiveStrLvl', tempEffectiveStrLvl);
    }, [statsHasChanged, equipmentHasChanged]);
 
-   useEffect(() => {
-      const maxAttRoll = calcMaxAttRoll({
+   useEffect(() => { // runs whenever any stat changes pretty much
+      const tempMaxAttRoll = calcMaxAttRoll({
          effectiveAttLvl: effectiveAttLvl,
          equipmentAttBonus: equipmentAttBonus,
          isRange: isRange,
@@ -204,9 +211,16 @@ const DpsChart = () => {
          isUndead: isUndead,
          isVampyre: isVampyre,
       });
-      setFinalStat('maxAttRoll', maxAttRoll);
+      setFinalStat('maxAttRoll', tempMaxAttRoll);
 
-      const maxHit = calcMaxHit({
+      const tempMaxDefRoll = calcMaxDefRoll({
+         isMagic: isMagic,
+         currentMonster: currentMonster,
+         attType: attType,
+      });
+      setFinalStat('maxDefRoll', tempMaxDefRoll);
+
+      const tempMaxHit = calcMaxHit({
          effectiveStrLvl: effectiveStrLvl,
          equipmentMeleeStrBonus: equipmentMeleeStrBonus,
          equipmentRangeStrBonus: equipmentRangeStrBonus,
@@ -245,25 +259,47 @@ const DpsChart = () => {
          isUndead: isUndead,
          isVampyre: isVampyre,
       });
-      setFinalStat('maxHit', maxHit);
+      setFinalStat('maxHit', tempMaxHit);
 
-      const maxDefRoll = calcMaxDefRoll({
-         isMagic: isMagic,
-         currentMonster: currentMonster,
-         attType: attType,
-      });
-      setFinalStat('maxDefRoll', maxDefRoll);
-
-      const accuracy = calcHitChance(maxAttRoll, maxDefRoll);
-      setFinalStat('accuracy', accuracy);
+      const tempAttSpeed = calcAttSpeed(equippedWeapon, chosenSpell, attStyle);
+      setFinalStat('attSpeed', tempAttSpeed);
 
    }, [statsHasChanged, equipmentHasChanged, monsterHasChanged, effectiveAttLvl, effectiveStrLvl]);
 
+   useEffect(() => { // runs whenever maxAttRoll or maxDefRoll changes
+      const tempAccuracy = calcHitChance(maxAttRoll, maxDefRoll);
+      setFinalStat('accuracy', tempAccuracy);
+   }, [maxAttRoll, maxDefRoll]);
+
+   useEffect(() => { // runs whenver accuracy or maxHit or attSpeed changes
+      const tempDps = (accuracy * (maxHit/2)) / (attSpeed*0.6);
+      setFinalStat('dps', tempDps);
+   }, [accuracy, maxHit, attSpeed])
 
    return (
       <div className='r2-c2-stats'>
-         <h2>Max Hit: {maxHit}</h2>
-         <h2>Accuracy: {accuracy}</h2>
+         <table className='r2-c2-table'>
+            <tr>
+               <th>Armor Set</th>
+               <td>Set 1</td>
+               <td>Set 2</td>
+            </tr>
+            <tr>
+               <th>Max Hit</th>
+               <td>{maxHit}</td>
+               <td>N/A</td>
+            </tr>
+            <tr>
+               <th>Accuracy</th>
+               <td>{accuracy}</td>
+               <td>N/A</td>
+            </tr>
+            <tr>
+               <th>DPS</th>
+               <td>{dps}</td>
+               <td>N/A</td>
+            </tr>
+         </table>
       </div>
    )
 }

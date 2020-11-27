@@ -7,6 +7,7 @@ export const useFinalStats = create((set, get) => ({
    maxDefRoll: 0,
    maxHit: 0,
    accuracy: 0,
+   attSpeed: 0,
    dps: 0,
    setFinalStat: (statType, value) => {
       set(() => ({
