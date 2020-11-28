@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import SelectWeapon from './SelectEquipment1/SelectWeapon';
-import { SelectWeaponStyle } from './SelectEquipment1/SelectWeaponStyle';
+import SelectWeaponStyle from './SelectEquipment1/SelectWeaponStyle';
 import SelectAmmo from './SelectEquipment1/SelectAmmo';
 import SelectBody from './SelectEquipment1/SelectBody';
 import SelectBoot from './SelectEquipment1/SelectBoot';
@@ -15,6 +15,8 @@ import HeaderR3C1 from './HeaderR3C1';
 import EquipmentStats from './EquipmentStats';
 import SelectSpell from './SelectEquipment1/SelectSpell';
 
+import Utilities from './Utilities';
+
 import { useUserStats } from '../../state/userStats';
 import shallow from 'zustand/shallow';
 
@@ -25,9 +27,9 @@ const EquipmentSelect = () => {
       isMagic: state.isMagic,
    }), shallow);
    
-   const meleeBackground = 'r3-c1-equipment-container-melee';
-   const rangeBackground = 'r3-c1-equipment-container-range';
-   const magicBackground = 'r3-c1-equipment-container-magic';
+   const meleeBackground = 'r3-equipment-container-melee';
+   const rangeBackground = 'r3-equipment-container-range';
+   const magicBackground = 'r3-equipment-container-magic';
 
    const [backgroundClass, setBackgroundClass] = useState(meleeBackground);
 
@@ -43,7 +45,10 @@ const EquipmentSelect = () => {
 
    return (
       <div className={backgroundClass}>
-         <HeaderR3C1/>
+         <div className='r3-title-buttons-container'>
+            <HeaderR3C1/>
+            <Utilities/>
+         </div>
          <SelectWeapon/>
          <SelectWeaponStyle/>
          <SelectAmmo/>

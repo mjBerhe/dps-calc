@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import useHover from '../../../hooks/useHover';
 import SelectSearchItem from '../../templates/SelectSearchItem';
-import { useUserStats } from '../../../state/userStats';
-import { useEquippedGear } from '../../../state/equippedGear';
+import { useUserStats2 } from '../../../state/userStats2';
+import { useEquippedGear2 } from '../../../state/equippedGear2';
 
-const SelectWeaponStyle = () => {
+const SelectWeaponStyle2 = () => {
 
-	const { setMultipleStats } = useUserStats();
-	const { attStyle, attType } = useUserStats(state => ({
+	const { setMultipleStats2 } = useUserStats2();
+	const { attStyle, attType } = useUserStats2(state => ({
 		attStyle: state.attStyle,
 		attType: state.attType,
 	}));
-	const equippedWeapon = useEquippedGear(state => state.weapon);
+	const equippedWeapon = useEquippedGear2(state => state.weapon);
 
 	// controls a list of weapon styles for the selected weapon
 	const [options, setOptions] = useState([]);
@@ -103,8 +103,6 @@ const SelectWeaponStyle = () => {
 			setStylePic(defaultStylePic);
 		}
 		setStylePic(defaultStylePic);
-
-		// console.log(equippedWeapon);
 	}, [equippedWeapon])
 
 	// when a style is chosen, userStats gets updated with the specific attack type and attack style
@@ -113,7 +111,7 @@ const SelectWeaponStyle = () => {
 		if (option) {
 			// if selecting a casting style on a magic staff
 			if (option.attType === 'spellcasting' || option.attType === 'defensive casting') {
-				setMultipleStats({
+				setMultipleStats2({
 					attType: 'magic',
 					attStyle: option.attStyle,
 					isMagic: true,
@@ -121,7 +119,7 @@ const SelectWeaponStyle = () => {
 				});
 			// if using a trident-type weapon, make sure chosenSpell is turned off
 			} else if (equippedWeapon.wepType === 'trident-class_weapons') {
-				setMultipleStats({
+				setMultipleStats2({
 					attType: 'magic',
 					attStyle: option.attStyle,
 					isMagic: true,
@@ -132,7 +130,7 @@ const SelectWeaponStyle = () => {
 			// double checking because tridents share similar attStyle
 			} else if (rangedWepTypes.includes(equippedWeapon.wepType)) {
 				if (rangedAttStyles.includes(option.attStyle)) {
-					setMultipleStats({
+					setMultipleStats2({
 						attType: option.attType,
 						attStyle: option.attStyle,
 						isRange: true,
@@ -141,7 +139,7 @@ const SelectWeaponStyle = () => {
 					});
 				}
 			} else { // else, should be melee
-				setMultipleStats({
+				setMultipleStats2({
 					attType: option.attType,
 					attStyle: option.attStyle,
 					isMagic: false,
@@ -176,4 +174,4 @@ const SelectWeaponStyle = () => {
 	)
 }
 
-export default SelectWeaponStyle;
+export default SelectWeaponStyle2;

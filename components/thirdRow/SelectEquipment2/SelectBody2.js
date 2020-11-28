@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import SelectSearchItem from '../../templates/SelectSearchItem';
 import { useLists } from '../../../state/lists.js';
-import { useEquippedGear } from '../../../state/equippedGear.js';
+import { useEquippedGear2 } from '../../../state/equippedGear2.js';
 import useHover from '../../../hooks/useHover';
 const fetch = require('node-fetch');
 
-const SelectBody = () => {
+const SelectBody2 = () => {
 
 	const { findEquipment } = useLists();
 	const bodyList = useLists(state => state.body);
 
-	const { equipItem } = useEquippedGear();
-	const equippedBody = useEquippedGear(state => state.body);
+	const { equipItem } = useEquippedGear2();
+	const equippedBody = useEquippedGear2(state => state.body);
 
 	const defaultBodyPic = '/Equipment/BodySlot.png';
 	const [bodyPic, setBodyPic] = useState(defaultBodyPic);
@@ -86,4 +86,4 @@ const SelectBody = () => {
 	)
 }
 
-export default SelectBody;
+export default SelectBody2;

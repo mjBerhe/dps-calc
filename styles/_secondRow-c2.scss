@@ -1,3 +1,5 @@
+@import './toggle';
+
 @mixin flexCenter() {
    display: flex;
    justify-content: center;
@@ -53,4 +55,27 @@
    grid-column: 1/2;
    margin: 0 25% 0% 25%;
    width: 50%;
+}
+
+.r2-c2-utilities-container {
+   border: 1px solid yellow;
+   grid-row: 1/4;
+   grid-column: 2/3;
+   display: grid;
+   grid-template-columns: minmax(30px, 100%);
+   grid-template-rows: repeat(4, minmax(50px, 25%));
+}
+
+.slayer-toggle-container {
+   border: 1px solid red;
+   grid-row: 1/2;
+   grid-column: 1/2;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   padding: 0 15% 0 15%;
+   img {
+      height: 30px;
+      width: 30px;
+   }
 }

@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import SelectSearchItem from '../../templates/SelectSearchItem';
 import { useLists } from '../../../state/lists.js';
-import { useEquippedGear } from '../../../state/equippedGear.js';
+import { useEquippedGear2 } from '../../../state/equippedGear2.js';
 import useHover from '../../../hooks/useHover';
 const fetch = require('node-fetch');
 
-const SelectCape = () => {
+const SelectCape2 = () => {
 
 	const { findEquipment } = useLists();
 	const capeList = useLists(state => state.cape);
 
-	const { equipItem } = useEquippedGear();
-	const equippedCape = useEquippedGear(state => state.cape);
+	const { equipItem } = useEquippedGear2();
+	const equippedCape = useEquippedGear2(state => state.cape);
 
 	const defaultCapePic = '/Equipment/CapeSlot.png';
 	const [capePic, setCapePic] = useState(defaultCapePic);
@@ -86,4 +86,4 @@ const SelectCape = () => {
 	)
 }
 
-export default SelectCape;
+export default SelectCape2;

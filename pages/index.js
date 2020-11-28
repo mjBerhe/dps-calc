@@ -18,6 +18,7 @@ import { SelectMonster } from '../components/secondRow/SelectMonster';
 
 import EquipmentSelect from '../components/thirdRow/EquipmentSelect';
 import EquipmentSelect2 from '../components/thirdRow/EquipmentSelect2.js';
+import Utilities from '../components/secondRow/Utilities';
 
 export default function DpsCalc({ lists }) {
 
@@ -44,6 +45,7 @@ export default function DpsCalc({ lists }) {
                <HeaderR2C2/>
                <DpsChart/>
                <SelectMonster/>
+               <Utilities/>
             </div>
          </div>
 

@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import SelectSearchItem from '../../templates/SelectSearchItem';
 import { useLists } from '../../../state/lists.js';
-import { useEquippedGear } from '../../../state/equippedGear.js';
+import { useEquippedGear2 } from '../../../state/equippedGear2.js';
 import useHover from '../../../hooks/useHover';
 const fetch = require('node-fetch');
 
-const SelectShield = () => {
+const SelectShield2 = () => {
 
 	const { findEquipment } = useLists();
 	const shieldList = useLists(state => state.shield);
 
-	const { equipItem } = useEquippedGear();
-	const equippedShield = useEquippedGear(state => state.shield);
+	const { equipItem } = useEquippedGear2();
+	const equippedShield = useEquippedGear2(state => state.shield);
 
 	const defaultShieldPic = '/Equipment/ShieldSlot.png';
 	const [shieldPic, setShieldPic] = useState(defaultShieldPic);
@@ -86,4 +86,4 @@ const SelectShield = () => {
 	)
 }
 
-export default SelectShield;
+export default SelectShield2;

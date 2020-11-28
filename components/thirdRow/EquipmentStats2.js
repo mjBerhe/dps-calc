@@ -1,9 +1,9 @@
-import { useUserStats } from '../../state/userStats';
+import { useUserStats2 } from '../../state/userStats2';
 import shallow from 'zustand/shallow';
 
-const EquipmentStats = () => {
+const EquipmentStats2 = () => {
 
-   const { equipmentAttBonus, equipmentDefBonus, equipmentMeleeStrBonus, equipmentRangeStrBonus, equipmentMagicDmgBonus, equipmentPrayerBonus } = useUserStats(state => ({
+   const { equipmentAttBonus, equipmentDefBonus, equipmentMeleeStrBonus, equipmentRangeStrBonus, equipmentMagicDmgBonus, equipmentPrayerBonus } = useUserStats2(state => ({
       equipmentAttBonus: state.equipmentAttBonus,
       equipmentDefBonus: state.equipmentDefBonus,
       equipmentMeleeStrBonus: state.equipmentMeleeStrBonus,
@@ -35,4 +35,4 @@ const EquipmentStats = () => {
    );
 }
 
-export default EquipmentStats;
+export default EquipmentStats2;

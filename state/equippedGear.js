@@ -41,7 +41,39 @@ export const useEquippedGear = create((set, get) => ({
    equipItem: (equipType, item) => {
       set(() => ({
          [equipType]: item,
-         equippedItemCount: get().equippedItemCount += 1,
+         equippedItemCount: get().equippedItemCount + 1,
+      }));
+   },
+   getEquippedGear: () => {
+      const equippedGear = {
+         weapon: get().weapon,
+         shield: get().shield,
+         helm: get().helm,
+         body: get().body,
+         leg: get().leg,
+         boot: get().boot,
+         cape: get().cape,
+         glove: get().glove,
+         neck: get().neck,
+         ring: get().ring,
+         ammo: get().ammo,
+      }
+      return equippedGear;
+   },
+   setEquippedGear: (gearSet) => {
+      set(() => ({
+         weapon: gearSet.weapon,
+         shield: gearSet.shield,
+         helm: gearSet.helm,
+         body: gearSet.body,
+         leg: gearSet.leg,
+         boot: gearSet.boot,
+         cape: gearSet.cape,
+         glove: gearSet.glove,
+         neck: gearSet.neck,
+         ring: gearSet.ring,
+         ammo: gearSet.ammo,
+         equippedItemCount: get().equippedItemCount + 1,
       }));
    },
    calcTotalBonuses: () => {

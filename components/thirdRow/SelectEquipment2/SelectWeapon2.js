@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import useHover from '../../../hooks/useHover';
 import SelectSearchItem from '../../templates/SelectSearchItem';
 import { useLists } from '../../../state/lists.js';
-import { useEquippedGear } from '../../../state/equippedGear.js';
+import { useEquippedGear2 } from '../../../state/equippedGear2.js';
 const fetch = require('node-fetch');
 
-const SelectWeapon = () => {
+const SelectWeapon2 = () => {
 
 	const { findEquipment } = useLists();
 	const weaponList = useLists(state => state.weapon);
 
-	const { equipItem } = useEquippedGear();
-	const equippedWeapon = useEquippedGear(state => state.weapon);
+	const { equipItem } = useEquippedGear2();
+	const equippedWeapon = useEquippedGear2(state => state.weapon);
 
 	const defaultWeaponPic = '/Equipment/WeaponSlot.png';
 	const [weaponPic, setWeaponPic] = useState(defaultWeaponPic);
@@ -100,4 +100,4 @@ const SelectWeapon = () => {
 	)
 }
 
-export default SelectWeapon;
+export default SelectWeapon2;

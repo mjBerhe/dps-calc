@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import SelectSearchItem from '../../templates/SelectSearchItem';
 import { useLists } from '../../../state/lists.js';
-import { useEquippedGear } from '../../../state/equippedGear.js';
+import { useEquippedGear2 } from '../../../state/equippedGear2.js';
 import useHover from '../../../hooks/useHover';
 const fetch = require('node-fetch');
 
-const SelectNeck = () => {
+const SelectNeck2 = () => {
 
 	const { findEquipment } = useLists();
 	const neckList = useLists(state => state.neck);
 
-	const { equipItem } = useEquippedGear();
-	const equippedNeck = useEquippedGear(state => state.neck);
+	const { equipItem } = useEquippedGear2();
+	const equippedNeck = useEquippedGear2(state => state.neck);
 
 	const defaultNeckPic = '/Equipment/NeckSlot.png';
 	const [neckPic, setNeckPic] = useState(defaultNeckPic);
@@ -86,4 +86,4 @@ const SelectNeck = () => {
 	)
 }
 
-export default SelectNeck;
+export default SelectNeck2;
