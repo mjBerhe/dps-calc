@@ -113,17 +113,17 @@ export async function getServerSideProps() { // for development
    const { db } = await connectToDatabase(); // connect to database
 
    const weapons = await db.collection('weapons').find().sort({ name: 1 }).toArray();
-   const shields = await db.collection('shields').find().sort({ name: 1 }).toArray();
+   const shields = await db.collection('shields').find().sort({ name: 1 }).limit(30).toArray();
    const helmets = await db.collection('helmets').find().sort({ name: 1 }).toArray();
-   const chests = await db.collection('chests').find().sort({ name: 1 }).toArray();
-   const legs = await db.collection('legs').find().sort({ name: 1 }).toArray();
-   const boots = await db.collection('boots').find().sort({ name: 1 }).toArray();
-   const capes = await db.collection('capes').find().sort({ name: 1 }).toArray();
-   const gloves = await db.collection('gloves').find().sort({ name: 1 }).toArray();
-   const necklaces = await db.collection('necklaces').find().sort({ name: 1 }).toArray();
-   const rings = await db.collection('rings').find().sort({ name: 1 }).toArray();
-   const ammos = await db.collection('ammos').find().sort({ name: 1 }).toArray();
-   const monsters = await db.collection('monsters').find().sort({ name: 1 }).toArray();
+   const chests = await db.collection('chests').find().sort({ name: 1 }).limit(30).toArray();
+   const legs = await db.collection('legs').find().sort({ name: 1 }).limit(30).toArray();
+   const boots = await db.collection('boots').find().sort({ name: 1 }).limit(30).toArray();
+   const capes = await db.collection('capes').find().sort({ name: 1 }).limit(30).toArray();
+   const gloves = await db.collection('gloves').find().sort({ name: 1 }).limit(30).toArray();
+   const necklaces = await db.collection('necklaces').find().sort({ name: 1 }).limit(30).toArray();
+   const rings = await db.collection('rings').find().sort({ name: 1 }).limit(30).toArray();
+   const ammos = await db.collection('ammos').find().sort({ name: 1 }).limit(30).toArray();
+   const monsters = await db.collection('monsters').find().sort({ name: 1 }).limit(30).toArray();
 
    return {
       props: {

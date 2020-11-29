@@ -57,11 +57,13 @@ const SelectWeapon = () => {
 				setWeaponPic(defaultWeaponPic);
 			}
 		} else { // items were cleared so FORCE equip no weapon
-			noWeapon = findEquipment('weapon', 100000);
-			equipItem('weapon', noWeapon);
-			setWeaponPic(defaultWeaponPic);
+			if (weaponList) {
+				noWeapon = findEquipment('weapon', 100000);
+				equipItem('weapon', noWeapon);
+				setWeaponPic(defaultWeaponPic);
+			}
 		}
-	}, [equippedWeapon])
+	}, [equippedWeapon, weaponList])
 
 	const [ref, hovered] = useHover();
 

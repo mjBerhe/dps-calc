@@ -99,7 +99,7 @@ const calcMaxAttRoll = (statObject, equipmentObject, monsterObject) => {
 			maxAttRoll *= 1.2;
 		}
 		if (isObbySet && isObbyWep) { // if using obby set with any obby wep
-			maxAttRoll *=1.1;
+			maxAttRoll *= 1.1;
 		}
 		return Math.floor(maxAttRoll);
 	}

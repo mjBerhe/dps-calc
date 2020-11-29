@@ -50,15 +50,14 @@ const calcMaxHit = (statObject, equipmentObject, monsterObject) => {
 		} else {
 			// getting magic lvl (including potion boost)
 			const visibleMagicLvl = effectiveStrLvl - 8;
-			if (equippedWeapon.id === 11907 || equippedWeapon.id === 11905 || equippedWeapon.id === 22288) { // trident of the seas
-				maxHit = 20 + Math.floor((visibleMagicLvl - 75)/3);
-				console.log('trident')
-			} else if (equippedWeapon.id === 12899 || equippedWeapon.id === 22292) { // trident of the swamp
-				maxHit = 23 + Math.floor((visibleMagicLvl - 75)/3);
-				console.log('trident')
-			} else if (equippedWeapon.id === 22323 || equippedWeapon.id === 22381) { // sanguinesti staff
-				maxHit = 24 + Math.floor((visibleMagicLvl - 75)/3);
-				console.log('trident')
+			if (equippedWeapon) {
+				if (equippedWeapon.id === 11907 || equippedWeapon.id === 11905 || equippedWeapon.id === 22288) { // trident of the seas
+					maxHit = 20 + Math.floor((visibleMagicLvl - 75)/3);
+				} else if (equippedWeapon.id === 12899 || equippedWeapon.id === 22292) { // trident of the swamp
+					maxHit = 23 + Math.floor((visibleMagicLvl - 75)/3);
+				} else if (equippedWeapon.id === 22323 || equippedWeapon.id === 22381) { // sanguinesti staff
+					maxHit = 24 + Math.floor((visibleMagicLvl - 75)/3);
+				}
 			}
 		}
 

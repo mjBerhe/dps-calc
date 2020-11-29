@@ -205,6 +205,7 @@ const Set1Calculations = () => {
          isVampyre: isVampyre,
       });
       setFinalStat('maxAttRoll', tempMaxAttRoll);
+      // console.log(`tempMaxAttRoll: ${tempMaxAttRoll}`)
 
       const tempMaxDefRoll = calcMaxDefRoll({
          isMagic: isMagic,

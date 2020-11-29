@@ -14,6 +14,7 @@ export const useLists = create((set, get) => ({
    ammo: null,
    monsters: null,
    currentMonster: null,
+   currentMonsterCopy: null,
    isDemon: false,
    isDragon: false,
    isLeafy: false,
@@ -49,7 +50,14 @@ export const useLists = create((set, get) => ({
    //       listCount: get().listCount + 1,
    //    }));
    // },
-   setCurrentMonster: (monsterObject) => {
+   setNewMonster: (monsterObject) => {
+      set(() => ({
+         currentMonster: monsterObject,
+         currentMonsterCopy: monsterObject,
+         listCount: get().listCount + 1,
+      }));
+   },
+   setTempMonster: (monsterObject) => { // used when temp changing monsters stats
       set(() => ({
          currentMonster: monsterObject,
          listCount: get().listCount + 1,

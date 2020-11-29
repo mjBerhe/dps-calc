@@ -4,22 +4,24 @@ import { useLists } from '../../state/lists.js';
 
 export const SelectMonster = () => {
 
-	const { setCurrentMonster, checkDemon, checkDragon, checkLeafy, checkUndead, checkVampyre } = useLists();
+	const { setNewMonster, checkDemon, checkDragon, checkLeafy, checkUndead, checkVampyre } = useLists();
 	const monsterList = useLists(state => state.monsters);
 	const currentMonster = useLists(state => state.currentMonster);
 
 	const [options, setOptions] = useState([]);
 
-	// when monsterList loads, create and set the list of options
+	// when monsterList loads, set options as the list itself
 	useEffect(() => {
 		if (monsterList) {
-			setOptions(monsterList);
+			setOptions(monsterList); // array of each monster
 			// console.log('monster list loaded');
 		}
 	}, [monsterList]);
 
 	const handleMonsterChange = (monster, type) => {
-		setCurrentMonster(monster);
+		// monster object passed in is the WHOLE monster object
+		setNewMonster(monster);
+		console.log(monster);
 	}
 
 	useEffect(() => {
@@ -30,7 +32,7 @@ export const SelectMonster = () => {
 			checkUndead();
 			checkVampyre();
 		}
-		console.log(currentMonster);
+		// console.log(currentMonster);
 	}, [currentMonster])
 
 	return(

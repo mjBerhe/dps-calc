@@ -70,7 +70,7 @@ export const useUserStats2 = create((set, get) => ({
          set(() => ({
             isRange: true,
          }));
-         console.log('ranged weapon equipped')
+         // console.log('ranged weapon equipped')
       } else {
          set(() => ({
             isRange: false,
