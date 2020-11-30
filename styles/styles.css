@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
 .first-row-container {
-  background: #9DB6E1;
+  background-color: #272727;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-column: 1/3;
@@ -16,8 +16,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 2px solid black;
-  border-top: none;
+  -webkit-box-shadow: 0px 3px;
+          box-shadow: 0px 3px;
+}
+
+.first-row-container h1 {
+  color: white;
 }
 
 .r2-first-column {
@@ -27,11 +31,13 @@
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-column: 1/2;
-  border: 1px solid pink;
+  background-color: #272727;
+  border-radius: 10px;
+  border: 2px solid black;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 50% 50%;
-      grid-template-columns: 50% 50%;
+  -ms-grid-columns: 45% 55%;
+      grid-template-columns: 45% 55%;
   -ms-grid-rows: 15% 20% 65%;
       grid-template-rows: 15% 20% 65%;
 }
@@ -68,7 +74,7 @@
   -ms-grid-rows: 50% 50%;
       grid-template-rows: 50% 50%;
   gap: 7% 2%;
-  margin: 0 10% 0 7%;
+  margin: 0 15% 0 7%;
 }
 
 .lvlInput-item {
@@ -124,19 +130,18 @@
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-column: 1/2;
+  width: 100%;
+  height: 100%;
   background-image: url("/Prayers/emptyPrayerContainer.png");
   background-repeat: no-repeat;
   background-size: 204px 275px;
   background-position: center center;
-  min-height: 275px;
-  min-width: 204px;
-  margin: 15%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 23% 23% 23% 23%;
-      grid-template-columns: 23% 23% 23% 23%;
-  -ms-grid-rows: 23% 23% 23% 23%;
-      grid-template-rows: 23% 23% 23% 23%;
+  -ms-grid-columns: (47px)[4];
+      grid-template-columns: repeat(4, 47px);
+  -ms-grid-rows: (67px)[4];
+      grid-template-rows: repeat(4, 67px);
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -207,7 +212,7 @@
   grid-column: 2/3;
   display: -ms-grid;
   display: grid;
-  margin: 5%;
+  margin: 5% 10% 10% 5%;
   -ms-grid-columns: 25% 25% 25% 25%;
       grid-template-columns: 25% 25% 25% 25%;
   -ms-grid-rows: 25% 25% 25% 25%;
@@ -321,9 +326,17 @@
 
 /* Center the control */
 .r2-second-column {
-  border: 1px solid yellow;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
   display: -ms-grid;
   display: grid;
+  background-color: #272727;
+  border-radius: 10px;
+  border: 2px solid black;
   -ms-grid-columns: 85% 15%;
       grid-template-columns: 85% 15%;
   -ms-grid-rows: 15% 70% 15%;
@@ -359,7 +372,9 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
-  margin: 0% 10% 2% 10%;
+  margin: 0% 5% 2% 5%;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 .r2-c2-stats table {
@@ -371,16 +386,16 @@
 .r2-c2-stats table th {
   min-width: 115px;
   width: 20%;
-  color: #9eb4f1;
-  font-size: 1.2em;
+  color: white;
+  font-size: 1.1em;
   font-weight: normal;
-  border-bottom: 1px solid white;
-  border-right: 1px solid white;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .r2-c2-stats table td {
-  color: #9eb4f1;
-  border-bottom: 1px solid white;
+  color: white;
+  border-bottom: 1px solid black;
   width: 40%;
   text-align: center;
 }
@@ -409,7 +424,7 @@
       grid-template-columns: minmax(30px, 100%);
   -ms-grid-rows: (minmax(50px, 25%))[4];
       grid-template-rows: repeat(4, minmax(50px, 25%));
-  padding-right: 0%;
+  margin: 0 10% 0 -35%;
 }
 
 .slayer-toggle-container {
@@ -428,7 +443,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 15% 0 15%;
+  padding: 0 20% 0 20%;
 }
 
 .slayer-toggle-container img {
@@ -452,7 +467,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 16% 0 16%;
+  padding: 0 20% 0 20%;
 }
 
 .dwh-spec-container input[type=number] {
@@ -479,7 +494,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 16% 0 16%;
+  padding: 0 20% 0 20%;
 }
 
 .bgs-spec-container input[type=number] {
@@ -497,7 +512,9 @@
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-column: 1/2;
-  border-right: 1px solid black;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #272727;
 }
 
 .r3-second-column {
@@ -507,7 +524,9 @@
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
   grid-column: 2/3;
-  border-left: 1px solid black;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #272727;
 }
 
 .r3-equipment-container-melee {
@@ -1114,37 +1133,37 @@
 
 body {
   height: 100%;
-  background-image: url("/Misc/background1.jfif");
+  background-color: #121212;
   background-size: cover;
-  margin: 0 10vw 0 10vw;
 }
 
 h1 {
   font-size: 2.5em;
   font-weight: bold;
-  color: black;
+  color: white;
 }
 
 h2 {
   font-size: 1.5em;
-  font-weight: bold;
-  color: black;
+  font-weight: normal;
+  color: white;
 }
 
 h3 {
   font-size: 1.1em;
-  font-weight: bold;
-  color: black;
+  font-weight: normal;
+  color: white;
 }
 
 h4 {
   font-size: 0.9em;
   font-weight: normal;
+  color: white;
 }
 
 h5 {
-  font-size: 0.75em;
-  font-weight: bold;
+  font-size: 0.8em;
+  font-weight: normal;
   color: black;
 }
 
@@ -1159,8 +1178,9 @@ h6 {
   display: grid;
   -ms-grid-rows: minmax(80px, 10vh) minmax(420px, 45vh) minmax(420px, 45vh);
       grid-template-rows: minmax(80px, 10vh) minmax(420px, 45vh) minmax(420px, 45vh);
-  -ms-grid-columns: (minmax(600px, 50%))[2];
-      grid-template-columns: repeat(2, minmax(600px, 50%));
+  -ms-grid-columns: (minmax(750px, 50%))[2];
+      grid-template-columns: repeat(2, minmax(750px, 50%));
+  gap: 2% 0px;
 }
 
 .r2-container {
@@ -1170,15 +1190,14 @@ h6 {
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2/3;
-  background: #4a6eacce;
-  margin: 3px 0 3px 0;
+  margin: 0 10vw 0 10vw;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: minmax(400px, 100%);
       grid-template-rows: minmax(400px, 100%);
-  -ms-grid-columns: minmax(500px, 35%) minmax(500px, 65%);
-      grid-template-columns: minmax(500px, 35%) minmax(500px, 65%);
-  border: 2px solid black;
+  -ms-grid-columns: minmax(500px, 40%) minmax(500px, 60%);
+      grid-template-columns: minmax(500px, 40%) minmax(500px, 60%);
+  grid-gap: 0 1%;
 }
 
 .r3-container {
@@ -1188,14 +1207,13 @@ h6 {
   -ms-grid-row: 3;
   -ms-grid-row-span: 1;
   grid-row: 3/4;
-  background: #9DB6E1;
-  margin: 3px 0 3px 0;
-  border: 2px solid black;
+  margin: 0 10vw 0 10vw;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: minmax(400px, 100%);
       grid-template-rows: minmax(400px, 100%);
   -ms-grid-columns: minmax(600px, 50%) minmax(600px, 50%);
       grid-template-columns: minmax(600px, 50%) minmax(600px, 50%);
+  grid-gap: 0 1%;
 }
 /*# sourceMappingURL=styles.css.map */

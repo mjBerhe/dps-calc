@@ -111,24 +111,24 @@ const Set1Calculations2 = () => {
 
       if (equippedWeapon) { // basically filter special status's from a weapon equip
          checkArclight();
-         checkChaosGauntlets();
          checkDHCB();
          checkDHL();
          checkLeafBB();
-         checkObbyNeck();
-         checkObbySet();
          checkObbyWep();
-         checkSalve();
          checkScythe();
-         checkSlayerHelm();
-         checkSlayerHelmImbued();
          checkSmokeStaff();
          checkTbow();
-         checkTomeOfFire();
-         checkVoid();
          checkPoweredStaff2(equippedWeapon);
          checkRange2(equippedWeapon);
       }
+      checkChaosGauntlets();
+      checkObbyNeck();
+      checkObbySet();
+      checkSalve();
+      checkSlayerHelm();
+      checkSlayerHelmImbued();
+      checkTomeOfFire();
+      checkVoid();
    }, [equipmentHasChanged]);
 
    useEffect(() => { // runs after user stats change or an equipment change

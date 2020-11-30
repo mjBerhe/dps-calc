@@ -1,20 +1,20 @@
 import useHover from '../../hooks/useHover';
+import { useUserStats } from '../../state/userStats';
 import { useEquippedGear } from '../../state/equippedGear';
 import { useCopiedGear } from '../../state/copiedGear';
 
 const Utilities = () => {
 
+   const { setMultipleStats } = useUserStats();
    const { getEquippedGear, setEquippedGear } = useEquippedGear();
    const { getCopiedGear, setCopiedGear } = useCopiedGear();
 
    const handleCopy = () => {
       setCopiedGear(getEquippedGear());
-      // console.log('copied');
    }
 
    const handlePaste = () => {
       setEquippedGear(getCopiedGear());
-      // console.log('pasted');
    }
 
    const handleDelete = () => {
@@ -31,7 +31,13 @@ const Utilities = () => {
          ring: null,
          ammo: null,
       });
-      // console.log('deleted');
+      setMultipleStats({
+         attType: null,
+         attStyle: null,
+         chosenSpell: null,
+         isMagic: false,
+         isRange: false,
+      });
    }
 
    const [copyRef, hoveredCopy] = useHover();

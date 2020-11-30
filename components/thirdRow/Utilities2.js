@@ -1,9 +1,11 @@
 import useHover from '../../hooks/useHover';
+import { useUserStats2 } from '../../state/userStats2';
 import { useEquippedGear2 } from '../../state/equippedGear2';
 import { useCopiedGear } from '../../state/copiedGear';
 
 const Utilities2 = () => {
 
+   const { setMultipleStats2 } = useUserStats2();
    const { getEquippedGear, setEquippedGear } = useEquippedGear2();
    const { getCopiedGear, setCopiedGear } = useCopiedGear();
 
@@ -31,7 +33,13 @@ const Utilities2 = () => {
          ring: null,
          ammo: null,
       });
-      // console.log('deleted');
+      setMultipleStats2({
+         attType: null,
+         attStyle: null,
+         chosenSpell: null,
+         isMagic: false,
+         isRange: false,
+      });
    }
 
    const [copyRef, hoveredCopy] = useHover();

@@ -19,37 +19,39 @@ $whiteColor: rgb(255, 255, 255);
 
 body {
    height: 100%;
-   background-image: url("/Misc/background1.jfif");
+   // background-image: url("/Misc/background1.jfif");
+   background-color: rgb(18, 18, 18);
    background-size: cover;
-   margin: 0 10vw 0 10vw;
+   // margin: 0 10vw 0 10vw;
 }
 
 h1 {
    font-size: 2.5em;
    font-weight: bold;
-   color: $blackColor;
+   color: $whiteColor;
 }
 
 h2 {
    font-size: 1.5em;
-   font-weight: bold;
-   color: $blackColor;
+   font-weight: normal;
+   color: $whiteColor;
 }
 
 h3 {
    font-size: 1.1em;
-   font-weight: bold;
-   color: $blackColor;
+   font-weight: normal;
+   color: $whiteColor;
 }
 
 h4 {
    font-size: 0.9em;
    font-weight: normal;
+   color: $whiteColor;
 }
 
-h5 {
-   font-size: 0.75em;
-   font-weight: bold;
+h5 { // hover fonts
+   font-size: 0.8em;
+   font-weight: normal;
    color: $blackColor;
 }
 
@@ -62,27 +64,27 @@ h6 {
 .grid-container {
    display: grid;
    grid-template-rows: minmax(80px, 10vh) minmax(420px, 45vh) minmax(420px, 45vh);
-   grid-template-columns: repeat(2, minmax(600px, 50%));
+   grid-template-columns: repeat(2, minmax(750px, 50%));
+   gap: 2% 0px;
+
 }
 
 .r2-container {
    grid-column: 1/3;
    grid-row: 2/3;
-   background: #4a6eacce;
-   margin: 3px 0 3px 0;
+   margin: 0 10vw 0 10vw;
    display: grid;
    grid-template-rows: minmax(400px, 100%);
-   grid-template-columns: minmax(500px, 35%) minmax(500px, 65%);
-   border: 2px solid black;
+   grid-template-columns: minmax(500px, 40%) minmax(500px, 60%);
+   grid-gap: 0 1%;
 }
 
 .r3-container {
    grid-column: 1/3;
    grid-row: 3/4;
-   background: #9DB6E1;
-   margin: 3px 0 3px 0;
-   border: 2px solid black;
+   margin: 0 10vw 0 10vw;
    display: grid;
    grid-template-rows: minmax(400px, 100%);
    grid-template-columns: minmax(600px, 50%) minmax(600px, 50%);
+   grid-gap: 0 1%;
 }

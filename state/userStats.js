@@ -1,10 +1,10 @@
 import create from 'zustand';
 
 export const useUserStats = create((set, get) => ({
-   attackLvl: '',
-   strengthLvl: '',
-   rangeLvl: '',
-   magicLvl: '',
+   attackLvl: '1',
+   strengthLvl: '1',
+   rangeLvl: '1',
+   magicLvl: '1',
    equipmentAttBonus: {
       stab: null,
       slash: null,

@@ -7,8 +7,13 @@
 }
 
 .r2-second-column {
-   border: 1px solid yellow;
+   grid-row: 1/2;
+   grid-column: 2/3;
    display: grid;
+   // background: #4a6eacce;
+   background-color: rgb(39, 39, 39);
+   border-radius: 10px;
+   border: 2px solid black;
    grid-template-columns: 85% 15%;
    grid-template-rows: 15% 70% 15%;
 }
@@ -26,7 +31,9 @@
    background-repeat: no-repeat;
    background-position: center center;
    background-size: 100% 100%;
-   margin: 0% 10% 2% 10%;
+   margin: 0% 5% 2% 5%;
+   border: 2px solid black;
+   border-radius: 10px;
    table {
       width: 100%;
       height: 100%;
@@ -35,15 +42,17 @@
          // border: 1px solid yellow;
          min-width: 115px;
          width: 20%;
-         color: rgb(158, 180, 241);
-         font-size: 1.2em;
+         // color: rgb(158, 180, 241);
+         color: white;
+         font-size: 1.1em;
          font-weight: normal;
-         border-bottom: 1px solid white;
-         border-right: 1px solid white;
+         border-bottom: 1px solid black;
+         border-right: 1px solid black;
       }
       td {
-         color: rgb(158, 180, 241);
-         border-bottom: 1px solid white;
+         // color: rgb(158, 180, 241);
+         color: white;
+         border-bottom: 1px solid black;
          width: 40%;
          text-align: center;
       }
@@ -64,7 +73,8 @@
    display: grid;
    grid-template-columns: minmax(30px, 100%);
    grid-template-rows: repeat(4, minmax(50px, 25%));
-   padding-right: 0%;
+   // padding-right: 20%;
+   margin: 0 10% 0 -35%;
 }
 
 .slayer-toggle-container {
@@ -74,7 +84,7 @@
    display: flex;
    justify-content: space-evenly;
    align-items: center;
-   padding: 0 15% 0 15%;
+   padding: 0 20% 0 20%;
    img {
       height: 30px;
       width: 30px;
@@ -88,7 +98,7 @@
    display: flex;
    justify-content: space-evenly;
    align-items: center;
-   padding: 0 16% 0 16%;
+   padding: 0 20% 0 20%;
    input[type=number] {
       width: 45px;
       padding-left: 5px;
@@ -105,7 +115,7 @@
    display: flex;
    justify-content: space-evenly;
    align-items: center;
-   padding: 0 16% 0 16%;
+   padding: 0 20% 0 20%;
    input[type=number] {
       width: 45px;
       padding-left: 5px;

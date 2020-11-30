@@ -134,6 +134,10 @@ export const useEquippedGear2 = create((set, get) => ({
                isChaosGauntlets: false,
             }));
          }
+      } else {
+         set(() => ({
+            isChaosGauntlets: false,
+         }));
       }
    },
    checkDHCB: () => {
@@ -184,23 +188,31 @@ export const useEquippedGear2 = create((set, get) => ({
                isObbyNeck: false,
             }));
          }
+      } else {
+         set(() => ({
+            isObbyNeck: false,
+         }));
       }
    },
    checkObbySet: () => {
       const equippedHelm = get().helm;
       const equippedBody = get().body;
-      const equippedLegs = get().legs
+      const equippedLegs = get().leg;
       if (equippedHelm && equippedBody && equippedLegs) {
          if (equippedHelm.id === 21298 && equippedBody.id === 21301 && equippedLegs.id === 21304) {
             set(() => ({
                isObbySet: true,
+            }));
+         } else {
+            set(() => ({
+               isObbySet: false,
             }));
          }
       } else {
          set(() => ({
             isObbySet: false,
          }));
-      }
+      } 
    },
    checkObbyWep: () => {
       const equippedWeapon = get().weapon;
@@ -254,6 +266,13 @@ export const useEquippedGear2 = create((set, get) => ({
                isSalveEI: false,
             }));
          }
+      } else {
+         set(() => ({
+            isSalve: false,
+            isSalveE: false,
+            isSalveI: false,
+            isSalveEI: false,
+         }));
       }
    },
    checkScythe: () => {
@@ -281,6 +300,10 @@ export const useEquippedGear2 = create((set, get) => ({
                isSlayerHelm: false,
             }));
          }
+      } else {
+         set(() => ({
+            isSlayerHelm: false,
+         }));
       }
    },
    checkSlayerHelmImbued: () => {
@@ -296,6 +319,10 @@ export const useEquippedGear2 = create((set, get) => ({
                isSlayerHelmImbued: false,
             }));
          }
+      } else {
+         set(() => ({
+            isSlayerHelmImbued: false,
+         }));
       }
    },
    checkSmokeStaff: () => {
@@ -334,6 +361,10 @@ export const useEquippedGear2 = create((set, get) => ({
                isTomeOfFire: false,
             }));
          }
+      } else {
+         set(() => ({
+            isTomeOfFire: false,
+         }));
       }
    },
    checkVoid: () => {
@@ -400,7 +431,15 @@ export const useEquippedGear2 = create((set, get) => ({
                   }
                }
             }
-         }
+         } 
+      } else {
+         set(() => ({ // no set is active
+            isVoidMelee: false,
+            isVoidRange: false,
+            isVoidRangeElite: false,
+            isVoidMage: false,
+            isVoidMageElite: false,
+         }));
       }
    }
 }));

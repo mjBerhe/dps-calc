@@ -157,6 +157,38 @@ const SelectSpell = () => {
 			element: 'earth',
 		},
 		{
+			name: 'Fire Wave',
+			value: 16,
+			maxHit: 20,
+			imgNumber: 16,
+			spellbook: 'standard',
+			element: 'fire',
+		},
+		{
+			name: 'Wind Surge',
+			value: 17,
+			maxHit: 21,
+			imgNumber: 17,
+			spellbook: 'standard',
+			element: 'wind',
+		},
+		{
+			name: 'Water Surge',
+			value: 18,
+			maxHit: 22,
+			imgNumber: 18,
+			spellbook: 'standard',
+			element: 'water',
+		},
+		{
+			name: 'Earth Surge',
+			value: 19,
+			maxHit: 23,
+			imgNumber: 19,
+			spellbook: 'standard',
+			element: 'earth',
+		},
+		{
 			name: 'Fire Surge',
 			value: 20,
 			maxHit: 24,
@@ -376,6 +408,11 @@ const SelectSpell = () => {
 			{hovered && chosenSpell &&
 				<div className="attack-style-hover">
 					<h5>{chosenSpell.name}</h5>
+				</div>
+			}
+			{hovered && !chosenSpell &&
+				<div className='attack-style-hover'>
+					<h5>Select a Spell</h5>
 				</div>
 			}
 			<SelectSearchItem

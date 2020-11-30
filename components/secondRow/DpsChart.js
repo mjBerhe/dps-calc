@@ -6,11 +6,15 @@ import { useUserStats2 } from '../../state/userStats2';
 import { useFinalStats } from '../../state/finalStats';
 import { useFinalStats2 } from '../../state/finalStats2';
 import calcHitChance from '../../formulas/accuracy';
+import roundNumber from '../../formulas/roundNumber';
 
 const DpsChart = () => {
 
    const currentMonster = useLists(state => state.currentMonster);
-   const attType = useUserStats(state => state.attType);
+   const {attType, attStyle} = useUserStats(state => ({
+      attType: state.attType,
+      attStyle: state.attStyle,
+   }), shallow);
    const attType2 = useUserStats2(state => state.attType);
 
    const { setFinalStat } = useFinalStats();
@@ -57,14 +61,19 @@ const DpsChart = () => {
    useEffect(() => {
       // console.log(`effectiveAttLvl: ${effectiveAttLvl}`);
       // console.log(`maxDefRoll: ${maxDefRoll}`);
-      console.log(`attType: ${attType}`);
+      // console.log(`attType: ${attType}`);
+      // console.log(`attStyle: ${attStyle}`);
    }, [effectiveAttLvl, maxAttRoll, maxDefRoll,  dps]);
 
    const outputStat1 = (stat) => {
       if (attType && currentMonster) {
          if (attType === 'magic' && stat === dps && !dps) { // want to do more testing
             return <td>Select a Spell</td>
-         } else return <td>{stat}</td>
+         } else {
+            if (stat === accuracy) {
+               return <td>{roundNumber(stat, 2)}%</td>
+            } else return <td>{roundNumber(stat, 4)}</td>
+         }
       } else if (attType && !currentMonster) {
          return <td>Select Monster</td>
       } else if (!attType && currentMonster) {
@@ -78,7 +87,11 @@ const DpsChart = () => {
       if (attType2 && currentMonster) {
          if (attType2 === 'magic' && stat === dps2 && !dps2) {
             return <td>Select a Spell</td>
-         } else return <td>{stat}</td>
+         } else {
+            if (stat === accuracy2) {
+               return <td>{roundNumber(stat, 2)}%</td>
+            } else return <td>{roundNumber(stat, 4)}</td>
+         }
       } else if (attType2 && !currentMonster) {
          return <td>Select Monster</td>
       } else if (!attType2 && currentMonster) {
