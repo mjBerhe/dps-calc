@@ -28,10 +28,6 @@ const PrayerSelect = () => {
    }), shallow);
 
    const { setStat, setMultipleStats } = useUserStats();
-   const { attPrayerValue, strPrayerValue } = useUserStats(state => ({
-      attPrayerValue: state.attPrayer,
-      strPrayerValue: state.strPrayer,
-   }));
    const { setStat2, setMultipleStats2 } = useUserStats2();
 
    const handleAttackPrayer = (e) => {
@@ -43,10 +39,6 @@ const PrayerSelect = () => {
          setStat2('strPrayer', 0);
       }
    }
-
-   // useEffect(() => {
-   //    console.log(attPrayerValue, strPrayerValue);
-   // }, [attPrayerValue, strPrayerValue])
 
    const handleStrengthPrayer = (e) => {
       const { type, value, specialPrayerDeactivated } = changeStrengthPrayer(e.target.name);

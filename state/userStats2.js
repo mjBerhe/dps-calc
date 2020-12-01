@@ -37,6 +37,7 @@ export const useUserStats2 = create((set, get) => ({
    isMagic: false,
    chosenSpell: null,
    isSlayerTask: false,
+   isSpecialAttack: false,
    userStatCount: 0, // reference whenever a stat changes (for useEffect)
    setStat2: (statType, value) => {
       set(() => ({

@@ -1,112 +1,125 @@
 import { useState, useEffect } from 'react';
 import useHover from '../../hooks/useHover';
+import { usePotions } from '../../state/potions';
+import { useUserStats } from '../../state/userStats';
+import { useUserStats2 } from '../../state/userStats2';
+import shallow from 'zustand/shallow';
 
 const PotionSelect = () => {
 
-   const [potions, setPotions] = useState({
-      'none': false, 'range1': false, 'range2': false,
-      'attack1': false, 'attack2': false, 'attack3': false,
-      'strength1': false, 'strength2': false, 'strength3': false,
-      'magic1': false, 'magic2': false, 'magic3': false,
-      'overload1': false, 'overload2': false, 'overload3': false, 'overload4': false,
-   });
+   const { changeAttackPotion, changeStrengthPotion, changeRangePotion, changeMagicPotion, changeOverloadPotion } = usePotions();
+   const { none, attack1, attack2, attack3, strength1, strength2, strength3, range1, range2, magic1, magic2, magic3, overload1, overload2, overload3, overload4 } = usePotions(state => ({
+      none: state.none,
+      attack1: state.attack1,
+      attack2: state.attack2,
+      attack3: state.attack3,
+      strength1: state.strength1,
+      strength2: state.strength2,
+      strength3: state.strength3,
+      range1: state.range1,
+      range2: state.range2,
+      magic1: state.magic1,
+      magic2: state.magic2,
+      magic3: state.magic3,
+      overload1: state.overload1,
+      overload2: state.overload2,
+      overload3: state.overload3,
+      overload4: state.overload4,
+   }), shallow);
 
-   const [potionClass, setPotionClass] = useState({
-      'none': 'potion-unselected', 'range1': 'potion-unselected', 'range2': 'potion-unselected',
-      'attack1': 'potion-unselected', 'attack2': 'potion-unselected', 'attack3': 'potion-unselected',
-      'strength1': 'potion-unselected', 'strength2': 'potion-unselected', 'strength3': 'potion-unselected',
-      'magic1': 'potion-unselected', 'magic2': 'potion-unselected', 'magic3': 'potion-unselected',
-      'overload1': 'potion-unselected', 'overload2': 'potion-unselected', 'overload3': 'potion-unselected', 'overload4': 'potion-unselected',
-   });
+   const { setStat, setMultipleStats } = useUserStats();
+   const { setStat2, setMultipleStats2 } = useUserStats2();
 
-   const changeAttackPotion = (e) => {
-      setPotions(prevPotions => ({
-         ...prevPotions,
-         'none': false,
-         'attack1': false,
-         'attack2': false,
-         'attack3': false,
-         'overload1': false,
-         'overload2': false,
-         'overload3': false,
-         'overload4': false,
-         [e.target.name]: !prevPotions[e.target.name],
-      }));
+   const handleAttackPotion = (e) => {
+      const { type, value, overloadOff } = changeAttackPotion(e.target.name);
+      setStat(type, value);
+      setStat2(type, value);
+      if (overloadOff) {
+         setMultipleStats({
+            strPotion: 0,
+            rngPotion: 0,
+            magPotion: 0,
+         });
+         setMultipleStats2({
+            strPotion: 0,
+            rngPotion: 0,
+            magPotion: 0,
+         });
+      }
    }
 
-   const changeStrengthPotion = (e) => {
-      setPotions(prevPotions => ({
-         ...prevPotions,
-         'none': false,
-         'strength1': false,
-         'strength2': false,
-         'strength3': false,
-         'overload1': false,
-         'overload2': false,
-         'overload3': false,
-         'overload4': false,
-         [e.target.name]: !prevPotions[e.target.name],
-      }));
+   const handleStrengthPotion = (e) => {
+      const { type, value, overloadOff } = changeStrengthPotion(e.target.name);
+      setStat(type, value);
+      setStat2(type, value);
+      if (overloadOff) {
+         setMultipleStats({
+            attPotion: 0,
+            rngPotion: 0,
+            magPotion: 0,
+         });
+         setMultipleStats2({
+            attPotion: 0,
+            rngPotion: 0,
+            magPotion: 0,
+         });
+      }
    }
 
-   const changeRangePotion = (e) => {
-      setPotions(prevPotions => ({
-         ...prevPotions,
-         'none': false,
-         'range1': false,
-         'range2': false,
-         'overload1': false,
-         'overload2': false,
-         'overload3': false,
-         'overload4': false,
-         [e.target.name]: !prevPotions[e.target.name],
-      }));
+   const handleRangePotion = (e) => {
+      const { type, value, overloadOff } = changeRangePotion(e.target.name);
+      setStat(type, value);
+      setStat2(type, value);
+      if (overloadOff) {
+         setMultipleStats({
+            strPotion: 0,
+            attPotion: 0,
+            magPotion: 0,
+         });
+         setMultipleStats2({
+            strPotion: 0,
+            attPotion: 0,
+            magPotion: 0,
+         });
+      }
    }
 
-   const changeMagicPotion = (e) => {
-      setPotions(prevPotions => ({
-         ...prevPotions,
-         'none': false,
-         'magic1': false,
-         'magic2': false,
-         'magic3': false,
-         'overload1': false,
-         'overload2': false,
-         'overload3': false,
-         'overload4': false,
-         [e.target.name]: !prevPotions[e.target.name],
-      }));
+   const handleMagicPotion = (e) => {
+      const { type, value, overloadOff } = changeMagicPotion(e.target.name);
+      setStat(type, value);
+      setStat2(type, value);
+      if (overloadOff) {
+         setMultipleStats({
+            strPotion: 0,
+            rngPotion: 0,
+            attPotion: 0,
+         });
+         setMultipleStats2({
+            strPotion: 0,
+            rngPotion: 0,
+            attPotion: 0,
+         });
+      }
    }
 
-   const changeOverloadPotion = (e) => {
-      setPotions(prevPotions => ({
-         ...prevPotions,
-         'none': false, 'range1': false, 'range2': false,
-         'attack1': false, 'attack2': false, 'attack3': false,
-         'strength1': false, 'strength2': false, 'strength3': false,
-         'magic1': false, 'magic2': false, 'magic3': false,
-         'overload1': false, 'overload2': false, 'overload3': false, 'overload4': false,
-         [e.target.name]: !prevPotions[e.target.name],
-      }));
-   }
-
-   const listOfPotions = Object.keys(potions);
-
-   useEffect(() => {
-      listOfPotions.forEach(potion => {
-         if (potions[potion]) {
-            setPotionClass(prevState => ({
-               ...prevState,
-               [potion]: 'potion-selected',
-            }));
-         } else {
-            setPotionClass(prevState => ({
-               ...prevState,
-               [potion]: 'potion-unselected',
-            }));
-         }
+   const handleOverloadPotion = (e) => {
+      const { type, value } = changeOverloadPotion(e.target.name);
+      setMultipleStats({
+         attPotion: value,
+         strPotion: value,
+         rngPotion: value,
+         magPotion: value,
       });
-   }, [potions])
+      setMultipleStats2({
+         attPotion: value,
+         strPotion: value,
+         rngPotion: value,
+         magPotion: value,
+      });
+      // setStat(type, value);
+      // setStat2(type, value);
+   }
+
 
    const [refEmpty, hoveredEmpty] = useHover();
    const [refAttack1, hoveredAttack1] = useHover();
@@ -127,72 +140,71 @@ const PotionSelect = () => {
 
    return (
       <div className="r2-c1-potions">
-         <div className={potionClass.none}>
-            <input type="image" src='/Potions/attack/empty.png' name='none' ref={refEmpty} onClick={changeOverloadPotion}/>
+         <div className={none.class}>
+            <input type="image" src='/Potions/attack/empty.png' name='none' ref={refEmpty} onClick={handleOverloadPotion}/>
             {hoveredEmpty && <h5 className='potion-item-hover'>None</h5>}
          </div>
-         <div className={potionClass.range1}>
-            <input type="image" src='/Potions/range/rng1.png' name='range1' ref={refRange1} onClick={changeRangePotion}/>
+         <div className={range1.class}>
+            <input type="image" src='/Potions/range/rng1.png' name='range1' ref={refRange1} onClick={handleRangePotion}/>
             {hoveredRange1 && <h5 className='potion-item-hover'>Ranging</h5>}
          </div>
-         <div className={potionClass.range2}>
-            <input type="image" src='/Potions/range/rng2.png' name='range2' ref={refRange2} onClick={changeRangePotion}/>
+         <div className={range2.class}>
+            <input type="image" src='/Potions/range/rng2.png' name='range2' ref={refRange2} onClick={handleRangePotion}/>
             {hoveredRange2 && <h5 className='potion-item-hover'>Divine Ranging</h5>}
          </div>
-         <div className={potionClass.overload1}>
-            <input type="image" src='/Potions/overload/nmz.png' name='overload1' ref={refOverload1} onClick={changeOverloadPotion}/>
+         <div className={overload1.class}>
+            <input type="image" src='/Potions/overload/nmz.png' name='overload1' ref={refOverload1} onClick={handleOverloadPotion}/>
             {hoveredOverload1 && <h5 className='potion-item-hover'>Overload (NMZ)</h5>}
          </div>
-         <div className={potionClass.attack1}>
-            <input type="image" src='/Potions/attack/att1.png' name='attack1' ref={refAttack1} onClick={changeAttackPotion}/>
+         <div className={attack1.class}>
+            <input type="image" src='/Potions/attack/att1.png' name='attack1' ref={refAttack1} onClick={handleAttackPotion}/>
             {hoveredAttack1 && <h5 className='potion-item-hover'>Attack</h5>}
          </div>
-         <div className={potionClass.attack2}>
-            <input type="image" src='/Potions/attack/att2.png' name='attack2' ref={refAttack2} onClick={changeAttackPotion}/>
+         <div className={attack2.class}>
+            <input type="image" src='/Potions/attack/att2.png' name='attack2' ref={refAttack2} onClick={handleAttackPotion}/>
             {hoveredAttack2 && <h5 className='potion-item-hover'>Super Attack</h5>}
          </div>
-         <div className={potionClass.attack3}>
-            <input type="image" src='/Potions/attack/att3.png' name='attack3' ref={refAttack3} onClick={changeAttackPotion}/>
+         <div className={attack3.class}>
+            <input type="image" src='/Potions/attack/att3.png' name='attack3' ref={refAttack3} onClick={handleAttackPotion}/>
             {hoveredAttack3 && <h5 className='potion-item-hover'>DS Attack</h5>}
          </div>
-         <div className={potionClass.overload2}>
-            <input type="image" src='/Potions/overload/cox.png' name='overload2' ref={refOverload2} onClick={changeOverloadPotion}/>
+         <div className={overload2.class}>
+            <input type="image" src='/Potions/overload/cox.png' name='overload2' ref={refOverload2} onClick={handleOverloadPotion}/>
             {hoveredOverload2 && <h5 className='potion-item-hover'>Overload (-)</h5>}
          </div>
-         <div className={potionClass.strength1}>
-            <input type="image" src='/Potions/strength/str1.png' name='strength1' ref={refStrength1} onClick={changeStrengthPotion}/>
+         <div className={strength1.class}>
+            <input type="image" src='/Potions/strength/str1.png' name='strength1' ref={refStrength1} onClick={handleStrengthPotion}/>
             {hoveredStrength1 && <h5 className='potion-item-hover'>Strength</h5>}
          </div>
-         <div className={potionClass.strength2}>
-            <input type="image" src='/Potions/strength/str2.png' name='strength2' ref={refStrength2} onClick={changeStrengthPotion}/>
+         <div className={strength2.class}>
+            <input type="image" src='/Potions/strength/str2.png' name='strength2' ref={refStrength2} onClick={handleStrengthPotion}/>
             {hoveredStrength2 && <h5 className='potion-item-hover'>Super Strength</h5>}
          </div>
-         <div className={potionClass.strength3}>
-            <input type="image" src='/Potions/strength/str3.png' name='strength3' ref={refStrength3} onClick={changeStrengthPotion}/>
+         <div className={strength3.class}>
+            <input type="image" src='/Potions/strength/str3.png' name='strength3' ref={refStrength3} onClick={handleStrengthPotion}/>
             {hoveredStrength3 && <h5 className='potion-item-hover'>DS Strength</h5>}
          </div>
-         <div className={potionClass.overload3}>
-            <input type="image" src='/Potions/overload/cox.png' name='overload3' ref={refOverload3} onClick={changeOverloadPotion}/>
+         <div className={overload3.class}>
+            <input type="image" src='/Potions/overload/cox.png' name='overload3' ref={refOverload3} onClick={handleOverloadPotion}/>
             {hoveredOverload3 && <h5 className='potion-item-hover'>Overload</h5>}
          </div>
-         <div className={potionClass.magic3}>
-            <input type="image" src='/Potions/magic/mag3.png' name='magic3' ref={refMagic3} onClick={changeMagicPotion}/>
+         <div className={magic3.class}>
+            <input type="image" src='/Potions/magic/mag3.png' name='magic3' ref={refMagic3} onClick={handleMagicPotion}/>
             {hoveredMagic3 && <h5 className='potion-item-hover'>Imbued Heart</h5>}
          </div>
-         <div className={potionClass.magic1}>
-            <input type="image" src='/Potions/magic/mag1.png' name='magic1' ref={refMagic1} onClick={changeMagicPotion}/>
+         <div className={magic1.class}>
+            <input type="image" src='/Potions/magic/mag1.png' name='magic1' ref={refMagic1} onClick={handleMagicPotion}/>
             {hoveredMagic1 && <h5 className='potion-item-hover'>Magic</h5>}
          </div>
-         <div className={potionClass.magic2}>
-            <input type="image" src='/Potions/magic/mag2.png' name='magic2' ref={refMagic2} onClick={changeMagicPotion}/>
+         <div className={magic2.class}>
+            <input type="image" src='/Potions/magic/mag2.png' name='magic2' ref={refMagic2} onClick={handleMagicPotion}/>
             {hoveredMagic2 && <h5 className='potion-item-hover'>Divine Magic</h5>}
          </div>
-         <div className={potionClass.overload4}>
-            <input type="image" src='/Potions/overload/cox.png' name='overload4' ref={refOverload4} onClick={changeOverloadPotion}/>
+         <div className={overload4.class}>
+            <input type="image" src='/Potions/overload/cox.png' name='overload4' ref={refOverload4} onClick={handleOverloadPotion}/>
             {hoveredOverload4 && <h5 className='potion-item-hover'>Overload (+)</h5>}
          </div>
       </div>
-
    );
 }
 

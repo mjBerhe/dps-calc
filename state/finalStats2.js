@@ -9,6 +9,8 @@ export const useFinalStats2 = create((set, get) => ({
    accuracy: 0,
    attSpeed: 0,
    dps: 0,
+   specMaxHit: 0,
+   specAccuracy: 0,
    setFinalStat2: (statType, value) => {
       set(() => ({
          [statType]: value,

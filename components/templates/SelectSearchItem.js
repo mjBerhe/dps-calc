@@ -40,6 +40,14 @@ export default function SelectSearchItem({ options, onChange, itemType }) {
       onChange(item, itemType)
    }
 
+   const divRef = useRef(null);
+
+   useEffect(() => {
+      if (divRef.current && display) {
+         divRef.current.scrollIntoView({ behaviour: 'smooth'});
+      }
+   }, [display])
+
    return (
       <div className='dropdown-item-container' ref={wrapperRef}>
          <input  
@@ -57,8 +65,9 @@ export default function SelectSearchItem({ options, onChange, itemType }) {
                   return <div className='dropdown-item-options' key={i} tabIndex='0' onClick={() => handleChange(item, itemType)}>{item.name}</div>
                })
             }
-            </div> 
+            </div>
          }
+         <div className='dropdown-bottom' ref={divRef}></div>
       </div>
    )
 }

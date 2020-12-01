@@ -292,7 +292,7 @@
 }
 
 .toggle-control input:checked ~ .control {
-  background-color: #8032c0;
+  background-color: #e638ec;
 }
 
 .toggle-control input:checked ~ .control:after {
@@ -451,10 +451,29 @@
   width: 30px;
 }
 
-.dwh-spec-container {
+.special-toggle-container {
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2/3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20% 0 20%;
+}
+
+.dwh-spec-container {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3/4;
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-column: 1/2;
@@ -479,9 +498,9 @@
 }
 
 .bgs-spec-container {
-  -ms-grid-row: 3;
+  -ms-grid-row: 4;
   -ms-grid-row-span: 1;
-  grid-row: 3/4;
+  grid-row: 4/5;
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-column: 1/2;
@@ -1068,6 +1087,10 @@
   background: rgba(80, 74, 74, 0.301);
 }
 
+.dropdown-bottom {
+  height: 1px;
+}
+
 .toggle-control {
   display: block;
   position: relative;
@@ -1090,7 +1113,7 @@
 }
 
 .toggle-control input:checked ~ .control {
-  background-color: #8032c0;
+  background-color: #e638ec;
 }
 
 .toggle-control input:checked ~ .control:after {

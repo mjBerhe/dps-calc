@@ -1,6 +1,7 @@
 import SlayerToggle from './SlayerToggle';
 import DWHSpec from './DWHSpec';
 import BGSSpec from './BGSSpec';
+import SpecialAttack from './SpecialAttack';
 
 const Utilities = () => {
    return (
@@ -8,6 +9,7 @@ const Utilities = () => {
          <SlayerToggle/>
          <DWHSpec/>
          <BGSSpec/>
+         <SpecialAttack/>
       </div>
    )
 }

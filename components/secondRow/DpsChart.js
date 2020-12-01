@@ -11,21 +11,26 @@ import roundNumber from '../../formulas/roundNumber';
 const DpsChart = () => {
 
    const currentMonster = useLists(state => state.currentMonster);
-   const {attType, attStyle} = useUserStats(state => ({
+
+   const { attType, isSpecialAttack } = useUserStats(state => ({
       attType: state.attType,
-      attStyle: state.attStyle,
+      isSpecialAttack: state.isSpecialAttack,
    }), shallow);
-   const attType2 = useUserStats2(state => state.attType);
+   const { attType2, isSpecialAttack2 } = useUserStats2(state => ({
+      attType2: state.attType,
+      isSpecialAttack2: state.isSpecialAttack,
+   }), shallow);
 
    const { setFinalStat } = useFinalStats();
-   const { maxAttRoll, maxDefRoll, maxHit, accuracy, attSpeed, dps, effectiveAttLvl } = useFinalStats(state => ({
+   const { maxAttRoll, maxDefRoll, maxHit, accuracy, attSpeed, dps, specMaxHit, specAccuracy } = useFinalStats(state => ({
       maxAttRoll: state.maxAttRoll,
       maxDefRoll: state.maxDefRoll,
       maxHit: state.maxHit,
       accuracy: state.accuracy,
       attSpeed: state.attSpeed,
       dps: state.dps,
-      effectiveAttLvl: state.effectiveAttLvl,
+      specMaxHit: state.specMaxHit,
+      specAccuracy: state.specAccuracy,
    }), shallow);
 
    const { setFinalStat2 } = useFinalStats2();
@@ -57,13 +62,6 @@ const DpsChart = () => {
       const tempDps2 = (accuracy2 * (maxHit2/2)) / (attSpeed2*0.6);
       setFinalStat2('dps', tempDps2);
    }, [accuracy2, maxHit2, attSpeed2]);
-
-   useEffect(() => {
-      // console.log(`effectiveAttLvl: ${effectiveAttLvl}`);
-      // console.log(`maxDefRoll: ${maxDefRoll}`);
-      // console.log(`attType: ${attType}`);
-      // console.log(`attStyle: ${attStyle}`);
-   }, [effectiveAttLvl, maxAttRoll, maxDefRoll,  dps]);
 
    const outputStat1 = (stat) => {
       if (attType && currentMonster) {
@@ -117,31 +115,53 @@ const DpsChart = () => {
       }
    }
 
+
    return (
       <div className='r2-c2-stats'>
          <table className='r2-c2-table'>
-            <tbody>
-               <tr>
-                  <th>Armor Set</th>
-                  <td>Set 1</td>
-                  <td>Set 2</td>
-               </tr>
-               <tr>
-                  <th>Max Hit</th>
-                  {outputMaxhit1()}
-                  {outputMaxhit2()}
-               </tr>
-               <tr>
-                  <th>Accuracy</th>
-                  {outputStat1(accuracy)}
-                  {outputStat2(accuracy2)}
-               </tr>
-               <tr>
-                  <th>DPS</th>
-                  {outputStat1(dps)}
-                  {outputStat2(dps2)}
-               </tr>
-            </tbody>
+            {isSpecialAttack && isSpecialAttack2 && 
+               <tbody>
+                  <tr>
+                     <th>Armor Set</th>
+                     <td>Set 1</td>
+                     <td>Set 2</td>
+                  </tr>
+                  <tr>
+                     <th>Spec Max Hit</th>
+                     <td>{specMaxHit}</td>
+                     <td>Spec Max Hit 2</td>
+                  </tr>
+                  <tr>
+                     <th>Spec Accuracy</th>
+                     <td>{specAccuracy}</td>
+                     <td>Spec Accuracy 2</td>
+                  </tr>
+               </tbody>
+            }
+            {!isSpecialAttack && !isSpecialAttack2 &&
+               <tbody>
+                  <tr>
+                     <th>Armor Set</th>
+                     <td>Set 1</td>
+                     <td>Set 2</td>
+                  </tr>
+                  <tr>
+                     <th>Max Hit</th>
+                     {outputMaxhit1()}
+                     {outputMaxhit2()}
+                  </tr>
+                  <tr>
+                     <th>Accuracy</th>
+                     {outputStat1(accuracy)}
+                     {outputStat2(accuracy2)}
+                  </tr>
+                  <tr>
+                     <th>DPS</th>
+                     {outputStat1(dps)}
+                     {outputStat2(dps2)}
+                  </tr>
+               </tbody>
+            }
          </table>
       </div>
    )

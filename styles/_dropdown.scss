@@ -41,7 +41,7 @@
 
 
 .dropdown-item-container {
-   // border: 1px solid pink;
+   // border: 1px solid black;
    min-height: 36px;
    input {
       background-image: url('/Misc/dropdown.png');
@@ -65,7 +65,7 @@
 }
 
 .dropdown-item-options-container {
-   // border: 1px solid yellow;
+   // border: 1px solid black;
    height: auto;
    max-height: 200px;
    min-width: 200px;
@@ -83,4 +83,8 @@
    &:hover {
       background: rgba(80, 74, 74, 0.301);
    }
+}
+
+.dropdown-bottom {
+   height: 1px;
 }

@@ -10,8 +10,8 @@ const calcEffectiveStrLvl = (statObject, equipmentObject) => {
 	let effectiveLvl = 0;
 
 	if (isRange) { // if using range
-		const rangePotionMultipliers = [1, 1.1, 1.1, 1.15, 1.1, 1.13, 1.16];
-		const rangePotionAddons = [0, 4, 4, 5, 4, 5, 6];
+		const rangePotionMultipliers = [1, 1.1, 1.1, 0, 1.15, 1.1, 1.13, 1.16];
+		const rangePotionAddons = [0, 4, 4, 0, 5, 4, 5, 6];
 		const rangePrayerValues = [1, 1.05, 1.1, 1.15, 1.23]
 
 		// Has Range lvl been inputted? If so, set effective level to it
