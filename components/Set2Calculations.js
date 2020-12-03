@@ -11,6 +11,7 @@ import calcMaxAttRoll from '../formulas/maxAttRoll';
 import calcMaxDefRoll from '../formulas/maxDefRoll';
 import calcMaxHit from '../formulas/maxHit';
 import calcAttSpeed from '../formulas/attSpeed.js';
+import calcHitChance from '../formulas/accuracy';
 
 const Set1Calculations2 = () => {
 
@@ -81,9 +82,14 @@ const Set1Calculations2 = () => {
    }), shallow);
 
    const { setFinalStat2 } = useFinalStats2();
-   const { effectiveAttLvl, effectiveStrLvl } = useFinalStats2(state => ({
+   const { effectiveAttLvl, effectiveStrLvl, maxAttRoll, maxDefRoll, maxHit, accuracy, attSpeed } = useFinalStats2(state => ({
       effectiveAttLvl: state.effectiveAttLvl,
       effectiveStrLvl: state.effectiveStrLvl,
+      maxAttRoll: state.maxAttRoll,
+      maxDefRoll: state.maxDefRoll,
+      maxHit: state.maxHit,
+      accuracy: state.accuracy,
+      attSpeed: state.attSpeed,
    }), shallow);
 
    useEffect(() => { // gets called after an equipment change
@@ -258,6 +264,16 @@ const Set1Calculations2 = () => {
       setFinalStat2('attSpeed', tempAttSpeed);
 
    }, [statsHasChanged, equipmentHasChanged, monsterHasChanged, effectiveAttLvl, effectiveStrLvl]);
+
+   useEffect(() => { // runs whenever maxAttRoll or maxDefRoll changes
+      const tempAccuracy = calcHitChance(maxAttRoll, maxDefRoll);
+      setFinalStat2('accuracy', tempAccuracy);
+   }, [maxAttRoll, maxDefRoll]);
+
+   useEffect(() => { // runs whenver accuracy or maxHit or attSpeed changes
+      const tempDps = (accuracy * (maxHit/2)) / (attSpeed*0.6);
+      setFinalStat2('dps', tempDps);
+   }, [accuracy, maxHit, attSpeed]);
 
    return (
       <></>
