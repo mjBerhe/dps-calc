@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { useLists } from '../../state/lists';
+import { useLists } from '../../../state/lists';
+import useHover from '../../../hooks/useHover';
 
 const DWHSpec = () => {
 
@@ -23,10 +24,13 @@ const DWHSpec = () => {
       }
    }
 
+   const [ref, hovered] = useHover();
+
    return (
       <div className='dwh-spec-container'>
-         <img src="/Misc/DWH.png" alt="dragon warhammer"/>
+         <img src="/Misc/DWH.png" alt="dragon warhammer" ref={ref}/>
          <input type="number" onChange={handleChange}/>
+         {hovered && <h5 className='utility-hover'>DWH Spec's Hit</h5>}
       </div>
    );
 }

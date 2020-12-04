@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import useHover from '../../hooks/useHover';
-import { usePotions } from '../../state/potions';
-import { useUserStats } from '../../state/userStats';
-import { useUserStats2 } from '../../state/userStats2';
+import useHover from '../../../hooks/useHover';
+import { usePotions } from '../../../state/potions';
+import { useUserStats } from '../../../state/userStats';
+import { useUserStats2 } from '../../../state/userStats2';
 import shallow from 'zustand/shallow';
 
 const PotionSelect = () => {

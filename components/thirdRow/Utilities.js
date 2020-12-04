@@ -46,17 +46,17 @@ const Utilities = () => {
 
    return (
       <div className='r3-buttons-container'>
-         <div className='copy-button-container'>
+         <div className='utility-button-container'>
             <input type="image" src='/Misc/copyIcon3.png' onClick={handleCopy} ref={copyRef}/>
-            {hoveredCopy && <h5 className='prayer-item-hover'>Copy</h5>}
+            {hoveredCopy && <h5 className='utility-buttons-hover'>Copy</h5>}
          </div>
-         <div className='paste-button-container'>
+         <div className='utility-button-container'>
             <input type="image" src='/Misc/pasteIcon2.png' onClick={handlePaste} ref={pasteRef}/>
-            {hoveredPaste && <h5 className='prayer-item-hover'>Paste</h5>}
+            {hoveredPaste && <h5 className='utility-buttons-hover'>Paste</h5>}
          </div>
-         <div className='delete-button-container'>
+         <div className='utility-button-container'>
             <input type="image" src='/Misc/deleteIcon2.png' onClick={handleDelete} ref={deleteRef}/>
-            {hoveredDelete && <h5 className='prayer-item-hover'>Delete</h5>}
+            {hoveredDelete && <h5 className='utility-buttons-hover'>Delete</h5>}
          </div>
       </div>
    );

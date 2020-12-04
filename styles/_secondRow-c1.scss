@@ -4,16 +4,13 @@
    align-items: center;
 }
 
-@mixin hoverItem($pixelsUp) {
+@mixin hoverItem($pixelsUp, $pixelsLeft) {
    position: absolute;
-   // background: white;
-   // opacity: 0.6;
    background: rgba(255, 255, 255, 0.6);
    width: auto;
    padding: 0 2px 0 2px;
    border-radius: 4px;
-   margin: 0 0 $pixelsUp 0;
-   @include flexCenter();
+   margin: 0 $pixelsLeft $pixelsUp 0;
 }
 
 .r2-first-column {
@@ -67,7 +64,7 @@
 }
 
 .lvlInput-item-hover {
-   @include hoverItem(40px);
+   @include hoverItem(40px, 0px);
 }
 
 .r2-c1-prayers {
@@ -114,7 +111,7 @@
 }
 
 .prayer-item-hover {
-   @include hoverItem(45px);
+   @include hoverItem(45px, 0px);
 }
 
 .r2-c1-potions {
@@ -147,5 +144,5 @@
 }
 
 .potion-item-hover {
-   @include hoverItem(50px);
+   @include hoverItem(50px, 5px);
 }

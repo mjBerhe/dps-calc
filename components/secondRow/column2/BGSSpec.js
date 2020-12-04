@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { useLists } from '../../state/lists';
+import { useLists } from '../../../state/lists';
+import useHover from '../../../hooks/useHover';
 
 const BGSSpec = () => {
 
@@ -32,11 +33,14 @@ const BGSSpec = () => {
          setTempMonster(currentMonsterCopy);
       }
    }
+
+   const [ref, hovered] = useHover();
    
    return (
       <div className='bgs-spec-container'>
-         <img src="/Misc/BGS.png" alt="bandos godsword"/>
+         <img src="/Misc/BGS.png" alt="bandos godsword" ref={ref}/>
          <input type="number" onChange={handleChange}/>
+         {hovered && <h5 className='utility-hover'>BGS Spec Dmg</h5>}
       </div>
    );
 }

@@ -275,6 +275,102 @@ const Set1Calculations2 = () => {
       setFinalStat2('dps', tempDps);
    }, [accuracy, maxHit, attSpeed]);
 
+   useEffect(() => {
+      if (equippedWeapon) {
+         if (equippedWeapon.id === 13263) { // abyssal bludgeon
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.495));
+            setFinalStat2('specAccuracy', accuracy)
+         } else if (equippedWeapon.id === 13265 || equippedWeapon.id === 13267 || equippedWeapon.id === 13269 || equippedWeapon.id === 13271) { // abyssal dagger
+            setFinalStat2('specMaxHit', Math.floor(maxHit*0.85)*2);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.25, maxDefRoll));
+         } else if (equippedWeapon.id === 4151 || equippedWeapon.id === 4178 || equippedWeapon.id === 20405 || equippedWeapon.id === 12774 || equippedWeapon.id === 12773) { // abyssal whip
+            setFinalStat2('specMaxHit', maxHit);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.25, maxDefRoll));
+         } else if (equippedWeapon.id === 11802 || equippedWeapon.id === 20593 || equippedWeapon.id === 22665 || equippedWeapon.id === 20368) { // armadyl godsword
+            setFinalStat2('specMaxHit', Math.floor(Math.floor(maxHit*1.1)*1.25));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else if (equippedWeapon.id === 11804 || equippedWeapon.id === 20370) { // bandos godsword
+            setFinalStat2('specMaxHit', Math.floor(Math.floor(maxHit*1.1)*1.1));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else if (equippedWeapon.id === 10887) { // barrelchest anchor
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.1));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else if (equippedWeapon.id === 11037) { // brine sabre
+            setFinalStat2('specMaxHit', maxHit);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else if (equippedWeapon.id === 21015) { // dinh's bulwark
+            setFinalStat2('specMaxHit', maxHit);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.2, maxDefRoll));
+         } else if (equippedWeapon.id === 11037) { // brine sabre
+            setFinalStat2('specMaxHit', maxHit);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else if (equippedWeapon.id === 1215 || equippedWeapon.id === 20407 || equippedWeapon.id === 1231 || equippedWeapon.id === 5680 || equippedWeapon.id === 5698) { // dragon dagger
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.15)*2);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.15, maxDefRoll));
+         } else if (equippedWeapon.id === 3204 || equippedWeapon.id === 23987 || equippedWeapon.id === 24125 || equippedWeapon.id === 13080) { // dragon/crystal halberd
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.1)*2);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*0.75, maxDefRoll));
+         } else if (equippedWeapon.id === 22731 || equippedWeapon.id === 22743 || equippedWeapon.id === 22734 || equippedWeapon.id === 22737 || equippedWeapon.id === 22740) { // dragon hasta
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.5));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else if (equippedWeapon.id === 1305) { // dragon longsword
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.15));
+            setFinalStat2('specAccuracy', accuracy);
+         } else if (equippedWeapon.id === 1434) { // dragon mace
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.5));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.25, maxDefRoll));
+         } else if (equippedWeapon.id === 4587 || equippedWeapon.id === 20406 || equippedWeapon.id === 20000) { // dragon scimitar
+            setFinalStat2('specMaxHit', maxHit);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.5, maxDefRoll));
+         } else if (equippedWeapon.id === 21009 || equippedWeapon.id === 21206) { // dragon sword
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.25));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.25, maxDefRoll));
+         } else if (equippedWeapon.id === 13576 || equippedWeapon.id === 20785) { // dragon warhammer
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.5));
+            setFinalStat2('specAccuracy', accuracy); 
+         } else if (equippedWeapon.id === 21742) { // granite hammer
+            setFinalStat2('specMaxHit', maxHit + 5);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.5, maxDefRoll));
+         } else if (equippedWeapon.id === 3101) { // rune claws
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.1));
+            setFinalStat2('specAccuracy', accuracy);
+         } else if (equippedWeapon.id === 11806 || equippedWeapon.id === 20372) { // saradomin godsword
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.1));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else if (equippedWeapon.id === 12809) { // saradomin sword
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.25));
+            setFinalStat2('specAccuracy', accuracy);
+         } else if (equippedWeapon.id === 11808 || equippedWeapon.id === 20374) { // zamorak godsword
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.1));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else if (equippedWeapon.id === 11785 || equippedWeapon.id === 23611) { // armadyl crossbow
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.1));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else if (equippedWeapon.id === 19478 || equippedWeapon.id === 19481 || equippedWeapon.id === 23630) { // heavy/light ballista
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.25));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.25, maxDefRoll));
+         } else if (equippedWeapon.id === 21902) { // dragon crossbow
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.2));
+            setFinalStat2('specAccuracy', accuracy);
+         } else if (equippedWeapon.id === 20849|| equippedWeapon.id === 21207) { // dragon thrownaxe
+            setFinalStat2('specMaxHit', maxHit);
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*1.25, maxDefRoll));
+         } else if (equippedWeapon.id === 12926 || equippedWeapon.id === 23611) { // toxic blowpipe
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.5));
+            setFinalStat2('specAccuracy', accuracy);
+         } else if (equippedWeapon.id === 11785 || equippedWeapon.id === 23611) { // armadyl crossbow
+            setFinalStat2('specMaxHit', Math.floor(maxHit*1.1));
+            setFinalStat2('specAccuracy', calcHitChance(maxAttRoll*2, maxDefRoll));
+         } else {
+            setFinalStat2('specMaxHit', maxHit);
+            setFinalStat2('specAccuracy', accuracy);
+         }
+      } else {
+         setFinalStat2('specMaxHit', maxHit);
+         setFinalStat2('specAccuracy', accuracy);
+      }
+   }, [equippedWeapon, maxAttRoll, maxDefRoll, maxHit, accuracy]);
+
    return (
       <></>
    )

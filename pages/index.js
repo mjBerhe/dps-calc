@@ -8,17 +8,17 @@ import Header from '../components/firstRow/Header';
 import Set1Calculations from '../components/Set1Calculations';
 import Set2Calculations from '../components/Set2Calculations';
 
-import HeaderR2C1 from '../components/secondRow/HeaderR2C1';
-import LvlInputs from '../components/secondRow/LvlInputs';
-import PrayerSelect from '../components/secondRow/PrayerSelect';
-import PotionSelect from '../components/secondRow/PotionSelect';
-import HeaderR2C2 from '../components/secondRow/HeaderR2C2';
-import DpsChart from '../components/secondRow/DpsChart';
-import { SelectMonster } from '../components/secondRow/SelectMonster';
+import HeaderR2C1 from '../components/secondRow/column1/HeaderR2C1';
+import LvlInputs from '../components/secondRow/column1/LvlInputs';
+import PrayerSelect from '../components/secondRow/column1/PrayerSelect';
+import PotionSelect from '../components/secondRow/column1/PotionSelect';
+import HeaderR2C2 from '../components/secondRow/column2/HeaderR2C2';
+import DpsChart from '../components/secondRow/column2/DpsChart';
+import { SelectMonster } from '../components/secondRow/column2/SelectMonster';
+import Utilities from '../components/secondRow/column2/Utilities';
 
 import EquipmentSelect from '../components/thirdRow/EquipmentSelect';
 import EquipmentSelect2 from '../components/thirdRow/EquipmentSelect2.js';
-import Utilities from '../components/secondRow/Utilities';
 
 export default function DpsCalc({ lists }) {
 
@@ -122,7 +122,7 @@ export async function getServerSideProps() { // for development
    const necklaces = await db.collection('necklaces').find().sort({ name: 1 }).toArray();
    const rings = await db.collection('rings').find().sort({ name: 1 }).toArray();
    const ammos = await db.collection('ammos').find().sort({ name: 1 }).toArray();
-   const monsters = await db.collection('monsters').find().sort({ name: 1 }).limit(100).toArray();
+   const monsters = await db.collection('monsters').find().sort({ name: 1 }).toArray();
 
    return {
       props: {

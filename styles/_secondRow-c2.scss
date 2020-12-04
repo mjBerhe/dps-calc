@@ -6,6 +6,15 @@
    align-items: center;
 }
 
+@mixin hoverItem($pixelsUp, $pixelsLeft) {
+   position: absolute;
+   background: rgba(255, 255, 255, 0.6);
+   width: auto;
+   padding: 0 2px 0 2px;
+   border-radius: 4px;
+   margin: 0 $pixelsLeft $pixelsUp 0;
+}
+
 .r2-second-column {
    grid-row: 1/2;
    grid-column: 2/3;
@@ -41,7 +50,7 @@
       th {
          // border: 1px solid yellow;
          min-width: 115px;
-         width: 20%;
+         width: 25%;
          // color: rgb(158, 180, 241);
          color: white;
          font-size: 1.1em;
@@ -53,8 +62,11 @@
          // color: rgb(158, 180, 241);
          color: white;
          border-bottom: 1px solid black;
-         width: 40%;
+         width: 37.5%;
          text-align: center;
+      }
+      h3 {
+         color: rgb(236, 139, 236);
       }
    }
 }
@@ -73,7 +85,6 @@
    display: grid;
    grid-template-columns: minmax(30px, 100%);
    grid-template-rows: repeat(4, minmax(50px, 25%));
-   // padding-right: 20%;
    margin: 0 10% 0 -35%;
 }
 
@@ -132,4 +143,8 @@
       border-radius: 4px;
       outline: none;
    }
+}
+
+.utility-hover {
+   @include hoverItem(50px, 0px)
 }

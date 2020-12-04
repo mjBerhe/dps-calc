@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { useUserStats } from '../../state/userStats';
-import { useUserStats2 } from '../../state/userStats2';
+import { useUserStats } from '../../../state/userStats';
+import { useUserStats2 } from '../../../state/userStats2';
+import useHover from '../../../hooks/useHover';
 
 const SlayerToggle = () => {
 
@@ -15,17 +16,16 @@ const SlayerToggle = () => {
       setStat2('isSlayerTask', !isSlayerTask2);
    }
 
-   // useEffect(() => {
-   //    console.log(isSlayerTask, isSlayerTask2);
-   // }, [isSlayerTask, isSlayerTask2]);
+   const [ref, hovered] = useHover();
 
    return (
       <div className='slayer-toggle-container'>
-         <img src="/Misc/slayerIcon.png" alt="slayer icon"/>
+         <img src="/Misc/slayerIcon.png" alt="slayer icon" ref={ref}/>
          <label className='toggle-control'>
             <input type="checkbox" onChange={handleToggle}/>
             <span className='control'></span>
          </label>
+         {hovered && <h5 className='utility-hover'>Slayer Task</h5>}
       </div>
    );
 }

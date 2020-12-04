@@ -1,7 +1,7 @@
 import shallow from 'zustand/shallow';
-import useHover from '../../hooks/useHover';
-import { useUserStats } from '../../state/userStats';
-import { useUserStats2 } from '../../state/userStats2';
+import useHover from '../../../hooks/useHover';
+import { useUserStats } from '../../../state/userStats';
+import { useUserStats2 } from '../../../state/userStats2';
 
 const LvlInputs = () => {
 
