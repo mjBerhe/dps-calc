@@ -14,9 +14,9 @@
       font-size: 1em;
       // text-align: center;
       &:focus {
-         outline:none;
+         outline: none;
+         width: 100%;
       }
-
    } 
 }
 
@@ -25,13 +25,16 @@
    height: auto;
    max-height: 200px;
    width: 100%;
-   min-width: 100px;
+   min-width: 200px;
    overflow: auto;
    background: white;
+   position: relative;
+   z-index: 3;
 }
 
 .dropdown-options {
    padding-left: 5%;
+   width: 100%;
    &:hover {
       background: rgba(80, 74, 74, 0.301);
    }

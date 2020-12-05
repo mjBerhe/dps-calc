@@ -1,7 +1,7 @@
 const calcMaxAttRoll = (statObject, equipmentObject, monsterObject) => {
 	
 	const { effectiveAttLvl, equipmentAttBonus, isRange, isMagic, attType, chosenSpell, isSlayerTask } = statObject;
-	const { isArclight, isDHCB, isDHL, isObbySet, isObbyWep, isSalve, isSalveE, isSalveI, isSalveEI, isSlayerHelm, isSlayerHelmImbued, isSmokeStaff, isTbow } = equipmentObject;
+	const { isArclight, isBlisterFlail, isDHCB, isDHL, isObbySet, isObbyWep, isSalve, isSalveE, isSalveI, isSalveEI, isSlayerHelm, isSlayerHelmImbued, isSmokeStaff, isTbow, isWildy } = equipmentObject;
 	const { currentMonster, isDemon, isDragon, isUndead, isVampyre } = monsterObject;
 
 	let maxAttRoll = Math.floor(effectiveAttLvl*(equipmentAttBonus[attType] + 64));
@@ -24,6 +24,9 @@ const calcMaxAttRoll = (statObject, equipmentObject, monsterObject) => {
 		// if monster is dragon and dhcb is equipped
 		if (isDragon && isDHCB) {
 			maxAttRoll *= 1.3;
+		}
+		if (isWildy) {
+			maxAttRoll *= 1.5;
 		}
 		// if tbow equipped
 		// right now, accuracy bonus capped at 140%
@@ -95,11 +98,17 @@ const calcMaxAttRoll = (statObject, equipmentObject, monsterObject) => {
 		if (isDemon && isArclight) { // if demon and using arclight
 			maxAttRoll *= 1.7;
 		}
+		if (isVampyre && isBlisterFlail) { // if vampyre and using blisterwood flail
+			maxAttRoll *= 1.05;
+		}
 		if (isDragon && isDHL) { // if dragon and using dragon hunter lance
 			maxAttRoll *= 1.2;
 		}
 		if (isObbySet && isObbyWep) { // if using obby set with any obby wep
 			maxAttRoll *= 1.1;
+		}
+		if (isWildy) {
+			maxAttRoll *= 1.5;
 		}
 		return Math.floor(maxAttRoll);
 	}

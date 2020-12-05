@@ -16,9 +16,11 @@ export const useEquippedGear = create((set, get) => ({
    ammo: null,
    equippedItemCount: 0,
    isArclight: false,
+   isBlisterFlail: false,
    isChaosGauntlets: false,
    isDHCB: false,
    isDHL: false,
+   isIvandisFlail: false,
    isLeafBB: false,
    isObbyNeck: false,
    isObbySet: false,
@@ -38,6 +40,7 @@ export const useEquippedGear = create((set, get) => ({
    isVoidRangeElite: false,
    isVoidMage: false,
    isVoidMageElite: false,
+   isWildy: false,
    equipItem: (equipType, item) => {
       set(() => ({
          [equipType]: item,
@@ -121,6 +124,18 @@ export const useEquippedGear = create((set, get) => ({
          }));
       }
    },
+   checkBlisterFlail: () => {
+      const equippedWeapon = get().weapon;
+      if (equippedWeapon.id === 24699) {
+         set(() => ({
+            isBlisterFlail: true,
+         }));
+      } else {
+         set(() => ({
+            isBlisterFlail: false,
+         }));
+      }
+   },
    checkChaosGauntlets: () => {
       const equippedGloves = get().glove;
       if (equippedGloves) {
@@ -160,6 +175,18 @@ export const useEquippedGear = create((set, get) => ({
       } else {
          set(() => ({
             isDHL: false,
+         }));
+      }
+   },
+   checkIvandisFlail: () => {
+      const equippedWeapon = get().weapon;
+      if (equippedWeapon.id === 22398) {
+         set(() => ({
+            isIvandisFlail: true,
+         }));
+      } else {
+         set(() => ({
+            isIvandisFlail: false,
          }));
       }
    },
@@ -438,6 +465,19 @@ export const useEquippedGear = create((set, get) => ({
             isVoidRangeElite: false,
             isVoidMage: false,
             isVoidMageElite: false,
+         }));
+      }
+   },
+   checkWildy: () => {
+      const equippedWeapon = get().weapon;
+      if (equippedWeapon.id === 22550 || equippedWeapon.id === 22545) {
+         set(() => ({
+            isWildy: true,
+         }));
+         console.log('wildy wep equipped')
+      } else {
+         set(() => ({
+            isWildy: false,
          }));
       }
    }

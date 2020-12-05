@@ -126,6 +126,7 @@ export const useLists = create((set, get) => ({
             set(() => ({
                isVampyre: true,
             }));
+            console.log('vampyre active')
          } else {
             set(() => ({
                isVampyre: false,

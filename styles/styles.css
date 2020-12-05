@@ -1030,19 +1030,23 @@
 
 .dropdown-container input:focus {
   outline: none;
+  width: 100%;
 }
 
 .dropdown-options-container {
   height: auto;
   max-height: 200px;
   width: 100%;
-  min-width: 100px;
+  min-width: 200px;
   overflow: auto;
   background: white;
+  position: relative;
+  z-index: 3;
 }
 
 .dropdown-options {
   padding-left: 5%;
+  width: 100%;
 }
 
 .dropdown-options:hover {

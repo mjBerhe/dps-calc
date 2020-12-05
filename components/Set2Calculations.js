@@ -42,14 +42,16 @@ const Set1Calculations2 = () => {
       isSlayerTask: state.isSlayerTask,
 	}), shallow);
 
-   const { calcTotalBonuses, checkArclight, checkChaosGauntlets, checkDHCB, checkDHL, checkLeafBB, checkObbyNeck, checkObbySet, checkObbyWep, checkSalve, checkScythe, checkSlayerHelm, checkSlayerHelmImbued, checkSmokeStaff, checkTbow, checkTomeOfFire, checkVoid } = useEquippedGear2();
-   const { equipmentHasChanged, equippedWeapon, isArclight, isChaosGauntlets, isDHCB, isDHL, isLeafBB, isObbyNeck, isObbySet, isObbyWep, isSalve, isSalveE, isSalveI, isSalveEI, isScythe, isSlayerHelm, isSlayerHelmImbued, isSmokeStaff, isTbow, isTomeOfFire, isVoidMelee, isVoidRange, isVoidRangeElite, isVoidMage, isVoidMageElite } = useEquippedGear2(state => ({
+   const { calcTotalBonuses, checkArclight, checkBlisterFlail, checkChaosGauntlets, checkDHCB, checkDHL, checkIvandisFlail, checkLeafBB, checkObbyNeck, checkObbySet, checkObbyWep, checkSalve, checkScythe, checkSlayerHelm, checkSlayerHelmImbued, checkSmokeStaff, checkTbow, checkTomeOfFire, checkVoid, checkWildy } = useEquippedGear2();
+   const { equipmentHasChanged, equippedWeapon, isArclight, isBlisterFlail, isChaosGauntlets, isDHCB, isDHL, isIvandisFlail, isLeafBB, isObbyNeck, isObbySet, isObbyWep, isSalve, isSalveE, isSalveI, isSalveEI, isScythe, isSlayerHelm, isSlayerHelmImbued, isSmokeStaff, isTbow, isTomeOfFire, isVoidMelee, isVoidRange, isVoidRangeElite, isVoidMage, isVoidMageElite, isWildy } = useEquippedGear2(state => ({
       equipmentHasChanged: state.equippedItemCount,
       equippedWeapon: state.weapon,
       isArclight: state.isArclight,
+      isBlisterFlail: state.isBlisterFlail,
       isChaosGauntlets: state.isChaosGauntlets,
       isDHCB: state.isDHCB,
       isDHL: state.isDHL,
+      isIvandisFlail: state.isIvandisFlail,
       isLeafBB: state.isLeafBB,
       isObbyNeck: state.isObbyNeck,
       isObbySet: state.isObbySet,
@@ -68,7 +70,8 @@ const Set1Calculations2 = () => {
 		isVoidRange: state.isVoidRange,
 		isVoidRangeElite: state.isVoidRangeElite,
 		isVoidMage: state.isVoidMage,
-		isVoidMageElite: state.isVoidMageElite,
+      isVoidMageElite: state.isVoidMageElite,
+      isWildy: state.isWildy,
    }), shallow);
 
    const { monsterHasChanged, currentMonster, isDemon, isDragon, isLeafy, isUndead, isVampyre } = useLists(state => ({
@@ -117,13 +120,16 @@ const Set1Calculations2 = () => {
 
       if (equippedWeapon) { // basically filter special status's from a weapon equip
          checkArclight();
+         checkBlisterFlail();
          checkDHCB();
          checkDHL();
+         checkIvandisFlail();
          checkLeafBB();
          checkObbyWep();
          checkScythe();
          checkSmokeStaff();
          checkTbow();
+         checkWildy();
          checkPoweredStaff2(equippedWeapon);
          checkRange2(equippedWeapon);
       }
@@ -191,6 +197,7 @@ const Set1Calculations2 = () => {
          isSlayerTask: isSlayerTask,
       }, {
          isArclight: isArclight,
+         isBlisterFlail: isBlisterFlail,
          isDHCB: isDHCB,
          isDHL: isDHL,
          isObbySet: isObbySet,
@@ -203,6 +210,7 @@ const Set1Calculations2 = () => {
          isSlayerHelmImbued: isSlayerHelmImbued,
          isSmokeStaff: isSmokeStaff,
          isTbow: isTbow,
+         isWildy: isWildy,
       }, {
          currentMonster: currentMonster,
          isDemon: isDemon,
@@ -232,9 +240,11 @@ const Set1Calculations2 = () => {
       }, {
          equippedWeapon: equippedWeapon,
          isArclight: isArclight,
+         isBlisterFlail: isBlisterFlail,
          isChaosGauntlets: isChaosGauntlets,
          isDHCB: isDHCB,
          isDHL: isDHL,
+         isIvandisFlail: isIvandisFlail,
          isLeafBB: isLeafBB,
          isObbyNeck: isObbyNeck,
          isObbySet: isObbySet,
@@ -250,6 +260,7 @@ const Set1Calculations2 = () => {
          isTbow: isTbow,
          isTomeOfFire: isTomeOfFire,
          isVoidMageElite: isVoidMageElite,
+         isWildy: isWildy,
       }, {
          currentMonster: currentMonster,
          isDemon: isDemon,

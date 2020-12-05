@@ -1,7 +1,7 @@
 const calcMaxHit = (statObject, equipmentObject, monsterObject) => {
 
 	const { effectiveStrLvl, equipmentMeleeStrBonus, equipmentRangeStrBonus, equipmentMagicDmgBonus, isRange, isMagic, chosenSpell, isSlayerTask } = statObject;
-	const { equippedWeapon, isArclight, isChaosGauntlets, isDHCB, isDHL, isLeafBB, isObbyNeck, isObbySet, isObbyWep, isSalve, isSalveE, isSalveI, isSalveEI, isScythe, isSlayerHelm, isSlayerHelmImbued, isSmokeStaff, isTbow, isTomeOfFire, isVoidMageElite } = equipmentObject;
+	const { equippedWeapon, isArclight, isBlisterFlail, isChaosGauntlets, isDHCB, isDHL, isIvandisFlail, isLeafBB, isObbyNeck, isObbySet, isObbyWep, isSalve, isSalveE, isSalveI, isSalveEI, isScythe, isSlayerHelm, isSlayerHelmImbued, isSmokeStaff, isTbow, isTomeOfFire, isVoidMageElite, isWildy } = equipmentObject;
 	const { currentMonster, isDemon, isDragon, isLeafy, isUndead, isVampyre } = monsterObject;
 
 	let maxHit = 0;
@@ -24,6 +24,9 @@ const calcMaxHit = (statObject, equipmentObject, monsterObject) => {
 		// if monster is dragon and dhcb is equipped
 		if (isDragon && isDHCB) {
 			maxHit = Math.floor(maxHit*1.3);
+		}
+		if (isWildy) {
+			maxHit = Math.floor(maxHit*1.5);
 		}
 		// if tbow equipped
 		// right now, magic level capped at 250
@@ -117,6 +120,13 @@ const calcMaxHit = (statObject, equipmentObject, monsterObject) => {
 		if (isDemon && isArclight) {
 			maxHit = Math.floor(maxHit*1.7);
 		}
+		if (isVampyre) {
+			if (isBlisterFlail) {
+				maxHit = Math.floor(maxHit*1.25);
+			} else if (isIvandisFlail) {
+				maxHit = Math.floor(maxHit*1.2);
+			}
+		}
 		if (isDragon && isDHL) {
 			maxHit = Math.floor(maxHit*1.2);
 		}
@@ -133,6 +143,9 @@ const calcMaxHit = (statObject, equipmentObject, monsterObject) => {
 			const halfHit = Math.floor(maxHit/2);
 			const quarterHit = Math.floor(halfHit/2);
 			maxHit = Math.floor(maxHit) + halfHit + quarterHit;
+		}
+		if (isWildy) {
+			maxHit = Math.floor(maxHit*1.5);
 		}
 		return Math.floor(maxHit);
 	}

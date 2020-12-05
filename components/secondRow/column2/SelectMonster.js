@@ -21,7 +21,7 @@ export const SelectMonster = () => {
 	const handleMonsterChange = (monster, type) => {
 		// monster object passed in is the WHOLE monster object
 		setNewMonster(monster);
-		console.log(monster);
+		// console.log(monster);
 	}
 
 	useEffect(() => {
