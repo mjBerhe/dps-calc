@@ -20,7 +20,7 @@ import Utilities from '../components/secondRow/column2/Utilities';
 import EquipmentSelect from '../components/thirdRow/EquipmentSelect';
 import EquipmentSelect2 from '../components/thirdRow/EquipmentSelect2.js';
 
-// const Weapon = require('../models/Weapons');
+import Footer from '../components/footer/Footer';
 
 export default function DpsCalc({ lists }) {
 
@@ -32,7 +32,16 @@ export default function DpsCalc({ lists }) {
 
    return (
       <div className='grid-container'>
-         <Header/>
+
+         <Head>
+            <title>DPS Tools</title>
+            <meta charSet="utf-8" />
+         </Head>
+
+         <div className='header'>
+            <Header/>
+         </div>
+         
          <Set1Calculations/>
          <Set2Calculations/>
 
@@ -58,6 +67,10 @@ export default function DpsCalc({ lists }) {
             <div className='r3-second-column'>
                <EquipmentSelect2/>
             </div>
+         </div>
+
+         <div className='footer'>
+            <Footer/>
          </div>
          
       </div>
@@ -124,7 +137,7 @@ export async function getStaticProps() { // for production
 //    const necklaces = await db.collection('necklaces').find().sort({ name: 1 }).toArray();
 //    const rings = await db.collection('rings').find().sort({ name: 1 }).toArray();
 //    const ammos = await db.collection('ammos').find().sort({ name: 1 }).toArray();
-//    const monsters = await db.collection('monsters').find().sort({ name: 1 }).limit(1500).toArray();
+//    const monsters = await db.collection('monsters').find().sort({ name: 1 }).limit(50).toArray();
 
 //    return {
 //       props: {
