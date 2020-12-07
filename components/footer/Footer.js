@@ -16,7 +16,7 @@ const Footer = () => {
             </Link>
          </div>
          <div className='footer-copyright'>
-            <h3>&#169; 2020 DPS Tools</h3>
+            <h3>&#169; 2020 OSRS DPS</h3>
          </div>
       </div>
    )

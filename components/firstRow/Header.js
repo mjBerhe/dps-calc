@@ -5,7 +5,7 @@ const Header = () => {
       <div className='header-container'>
          <div className='header-logo'>
             <Link href='/'>
-               <a><h1>DPS Tools</h1></a>
+               <a><h1>OSRS DPS</h1></a>
             </Link>
          </div>
          <div className='header-link-dps'>

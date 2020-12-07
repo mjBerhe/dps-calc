@@ -64,7 +64,7 @@ h6 { // hover equipment stats
 
 .grid-container {
    display: grid;
-   grid-template-rows: minmax(80px, 10vh) minmax(420px, 45vh) minmax(420px, 45vh) minmax(60px, 8vh);
+   grid-template-rows: minmax(80px, 10vh) minmax(420px, 45vh) minmax(420px, 45vh) auto;
    grid-template-columns: repeat(2, minmax(750px, 50%));
    gap: 2% 0px;
 
