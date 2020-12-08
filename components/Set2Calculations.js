@@ -25,7 +25,7 @@ const Set1Calculations2 = () => {
       equipmentAttBonus: state.equipmentAttBonus,
       equipmentMeleeStrBonus: state.equipmentMeleeStrBonus,
       equipmentRangeStrBonus: state.equipmentRangeStrBonus,
-      equipmentMagicDmgBonus: state.equipmentMagicStrBonus,
+      equipmentMagicDmgBonus: state.equipmentMagicDmgBonus,
 		attPotion: state.attPotion,
       attPrayer: state.attPrayer,
       strPotion: state.strPotion,
