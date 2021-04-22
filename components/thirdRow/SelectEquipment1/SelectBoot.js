@@ -44,7 +44,7 @@ const SelectBoot = () => {
 		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		if (equippedBoot) {
-			const response = await fetch(`${proxyUrl}${url}${equippedBoot.id}.png`);
+			const response = await fetch(`${url}${equippedBoot.id}.png`);
 			setBootPic(response.url);
 		} else setBootPic(defaultBootPic);
 	}, [equippedBoot]);
@@ -55,12 +55,12 @@ const SelectBoot = () => {
 		<div className="boot-slot">
 			<div className='item-image' ref={ref}>
 				{bootPic !== defaultBootPic &&
-					<img src={bootPic} alt="weapon pic"/>
+					<img src={bootPic} alt="boot pic"/>
 				}
 			</div>
 			<div className='default-image'>
 				{bootPic === defaultBootPic &&
-					<img src={bootPic} alt="default weapon pic"/>
+					<img src={bootPic} alt="default boot pic"/>
 				}
 			</div>
 			{hovered && equippedBoot && 

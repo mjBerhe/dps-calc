@@ -44,7 +44,7 @@ const SelectAmmo = () => {
 		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		if (equippedAmmo) {
-			const response = await fetch(`${proxyUrl}${url}${equippedAmmo.id}.png`);
+			const response = await fetch(`${url}${equippedAmmo.id}.png`);
 			setAmmoPic(response.url);
 		} else setAmmoPic(defaultAmmoPic);
 	}, [equippedAmmo]);
@@ -55,12 +55,12 @@ const SelectAmmo = () => {
 		<div className="ammo-slot">
 			<div className='item-image' ref={ref}>
 				{ammoPic !== defaultAmmoPic &&
-					<img src={ammoPic} alt="weapon pic"/>
+					<img src={ammoPic} alt="ammo pic"/>
 				}
 			</div>
 			<div className='default-image'>
 				{ammoPic === defaultAmmoPic &&
-					<img src={ammoPic} alt="default weapon pic"/>
+					<img src={ammoPic} alt="default ammo pic"/>
 				}
 			</div>
 			{hovered && equippedAmmo && 

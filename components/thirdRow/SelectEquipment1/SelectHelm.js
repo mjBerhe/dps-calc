@@ -44,7 +44,7 @@ const SelectHelm = () => {
 		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		if (equippedHelm) {
-			const response = await fetch(`${proxyUrl}${url}${equippedHelm.id}.png`);
+			const response = await fetch(`${url}${equippedHelm.id}.png`);
 			setHelmPic(response.url);
 		} else setHelmPic(defaultHelmPic);
 	}, [equippedHelm]);
@@ -55,12 +55,12 @@ const SelectHelm = () => {
 		<div className="helm-slot">
 			<div className='item-image' ref={ref}>
 				{helmPic !== defaultHelmPic &&
-					<img src={helmPic} alt="weapon pic"/>
+					<img src={helmPic} alt="helm pic"/>
 				}
 			</div>
 			<div className='default-image'>
 				{helmPic === defaultHelmPic &&
-					<img src={helmPic} alt="default weapon pic"/>
+					<img src={helmPic} alt="default helm pic"/>
 				}
 			</div>
 			{hovered && equippedHelm && 
