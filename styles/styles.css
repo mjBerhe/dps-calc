@@ -709,17 +709,12 @@
 .equipment-item-hover {
   position: absolute;
   background: rgba(255, 255, 255, 0.6);
-  width: auto;
+  min-width: auto;
   padding: 2px;
   border-radius: 4px;
   margin-left: 36px;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -727,6 +722,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .attack-style-hover {
@@ -1368,7 +1367,7 @@ h6 {
   -ms-grid-row: 3;
   -ms-grid-row-span: 1;
   grid-row: 3/4;
-  margin: 0 10vw 0 10vw;
+  margin: 0 10vw;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: minmax(400px, 100%);

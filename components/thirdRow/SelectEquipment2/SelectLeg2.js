@@ -44,7 +44,7 @@ const SelectLeg2 = () => {
 		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		if (equippedLeg) {
-			const response = await fetch(`${proxyUrl}${url}${equippedLeg.id}.png`);
+			const response = await fetch(`${url}${equippedLeg.id}.png`);
 			setLegPic(response.url);
 		} else setLegPic(defaultLegPic);
 	}, [equippedLeg]);
@@ -55,12 +55,12 @@ const SelectLeg2 = () => {
 		<div className="leg-slot">
 			<div className='item-image' ref={ref}>
 				{legPic !== defaultLegPic &&
-					<img src={legPic} alt="weapon pic"/>
+					<img src={legPic} alt="leg pic"/>
 				}
 			</div>
 			<div className='default-image'>
 				{legPic === defaultLegPic &&
-					<img src={legPic} alt="default weapon pic"/>
+					<img src={legPic} alt="default leg pic"/>
 				}
 			</div>
 			{hovered && equippedLeg && 

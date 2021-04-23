@@ -51,7 +51,7 @@ const SelectWeapon2 = () => {
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		if (equippedWeapon) {
 			if (equippedWeapon.id !== 100000) {
-				const response = await fetch(`${proxyUrl}${url}${equippedWeapon.id}.png`);
+				const response = await fetch(`${url}${equippedWeapon.id}.png`);
 				setWeaponPic(response.url);
 			} else { // user CHOSE to equip no weapon
 				setWeaponPic(defaultWeaponPic);

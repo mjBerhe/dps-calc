@@ -44,7 +44,7 @@ const SelectCape2 = () => {
 		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		if (equippedCape) {
-			const response = await fetch(`${proxyUrl}${url}${equippedCape.id}.png`);
+			const response = await fetch(`${url}${equippedCape.id}.png`);
 			setCapePic(response.url);
 		} else setCapePic(defaultCapePic);
 	}, [equippedCape]);
@@ -55,12 +55,12 @@ const SelectCape2 = () => {
 		<div className="cape-slot">
 			<div className='item-image' ref={ref}>
 				{capePic !== defaultCapePic &&
-					<img src={capePic} alt="weapon pic"/>
+					<img src={capePic} alt="cape pic"/>
 				}
 			</div>
 			<div className='default-image'>
 				{capePic === defaultCapePic &&
-					<img src={capePic} alt="default weapon pic"/>
+					<img src={capePic} alt="default cape pic"/>
 				}
 			</div>
 			{hovered && equippedCape && 

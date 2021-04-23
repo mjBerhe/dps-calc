@@ -44,7 +44,7 @@ const SelectRing2 = () => {
 		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		if (equippedRing) {
-			const response = await fetch(`${proxyUrl}${url}${equippedRing.id}.png`);
+			const response = await fetch(`${url}${equippedRing.id}.png`);
 			setRingPic(response.url);
 		} else setRingPic(defaultRingPic);
 	}, [equippedRing]);
@@ -55,12 +55,12 @@ const SelectRing2 = () => {
 		<div className="ring-slot">
 			<div className='item-image' ref={ref}>
 				{ringPic !== defaultRingPic &&
-					<img src={ringPic} alt="weapon pic"/>
+					<img src={ringPic} alt="ring pic"/>
 				}
 			</div>
 			<div className='default-image'>
 				{ringPic === defaultRingPic &&
-					<img src={ringPic} alt="default weapon pic"/>
+					<img src={ringPic} alt="default ring pic"/>
 				}
 			</div>
 			{hovered && equippedRing && 

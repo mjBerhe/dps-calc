@@ -44,7 +44,7 @@ const SelectNeck2 = () => {
 		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		if (equippedNeck) {
-			const response = await fetch(`${proxyUrl}${url}${equippedNeck.id}.png`);
+			const response = await fetch(`${url}${equippedNeck.id}.png`);
 			setNeckPic(response.url);
 		} else setNeckPic(defaultNeckPic);
 	}, [equippedNeck]);
@@ -55,12 +55,12 @@ const SelectNeck2 = () => {
 		<div className="neck-slot">
 			<div className='item-image' ref={ref}>
 				{neckPic !== defaultNeckPic &&
-					<img src={neckPic} alt="weapon pic"/>
+					<img src={neckPic} alt="necklace pic"/>
 				}
 			</div>
 			<div className='default-image'>
 				{neckPic === defaultNeckPic &&
-					<img src={neckPic} alt="default weapon pic"/>
+					<img src={neckPic} alt="default necklace pic"/>
 				}
 			</div>
 			{hovered && equippedNeck && 

@@ -44,7 +44,7 @@ const SelectGlove2 = () => {
 		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const url = "https://raw.githubusercontent.com/osrsbox/osrsbox-db/master/docs/items-icons/";
 		if (equippedGlove) {
-			const response = await fetch(`${proxyUrl}${url}${equippedGlove.id}.png`);
+			const response = await fetch(`${url}${equippedGlove.id}.png`);
 			setGlovePic(response.url);
 		} else setGlovePic(defaultGlovePic);
 	}, [equippedGlove]);
@@ -55,12 +55,12 @@ const SelectGlove2 = () => {
 		<div className="glove-slot">
 			<div className='item-image' ref={ref}>
 				{glovePic !== defaultGlovePic &&
-					<img src={glovePic} alt="weapon pic"/>
+					<img src={glovePic} alt="glove pic"/>
 				}
 			</div>
 			<div className='default-image'>
 				{glovePic === defaultGlovePic &&
-					<img src={glovePic} alt="default weapon pic"/>
+					<img src={glovePic} alt="default glove pic"/>
 				}
 			</div>
 			{hovered && equippedGlove && 
